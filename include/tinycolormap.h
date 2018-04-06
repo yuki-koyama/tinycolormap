@@ -160,7 +160,7 @@ namespace tinycolormap
         }
         else
         {
-            const double t = (x - 0.8) * (1.0 - 0.8);
+            const double t = (x - 0.8) / (1.0 - 0.8);
             return r + g + t * b;
         }
     }
