@@ -36,13 +36,14 @@ namespace tinycolormap
     
     enum class ColorMapType
     {
-        Heat, Jet, Hot
+        Heat, Jet, Hot, Gray
     };
     
     inline Eigen::Vector3d GetColor(double x, ColorMapType type = ColorMapType::Heat);
     inline Eigen::Vector3d GetHeatColor(double x);
     inline Eigen::Vector3d GetJetColor(double x);
     inline Eigen::Vector3d GetHotColor(double x);
+    inline Eigen::Vector3d GetGrayColor(double x);
 
     //////////////////////////////////////////////////////////////////////////////////
     // Implementation
@@ -58,6 +59,8 @@ namespace tinycolormap
                 return GetJetColor(x);
             case ColorMapType::Hot:
                 return GetHotColor(x);
+            case ColorMapType::Gray:
+                return GetGrayColor(x);
             default:
                 break;
         }
@@ -163,6 +166,13 @@ namespace tinycolormap
             const double t = (x - 0.8) / (1.0 - 0.8);
             return r + g + t * b;
         }
+    }
+    
+    inline Eigen::Vector3d GetGrayColor(double x)
+    {
+        x = std::max(0.0, std::min(1.0, x));
+        
+        return (1.0 - x) * Eigen::Vector3d::Ones();
     }
 }
 
