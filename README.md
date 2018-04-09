@@ -1,9 +1,30 @@
 # tinycolormap
-A tiny header-only library for colormaps written in C++11
+A tiny header-only library for color maps written in C++11
 
 ## Dependencies
 
 - Eigen http://eigen.tuxfamily.org/
+
+## Sample Code
+
+```
+#include <iostream>
+#include <tinycolormap.h>
+
+int main()
+{
+  // Define a target value. This value should be in [0, 1]; otherwise, it will be cropped to 0 or 1.
+  const double value = 0.5;
+  
+  // Get the color as a 3-dimensional double-valued vector. Here, Viridis is specified as a colormap.
+  const Eigen::Vector3d color = tinycolormap::GetColor(value, tinycolormap::ColorMapType::Viridis);
+  
+  // Print the RGB values. Each value is in [0, 1].
+  std::cout << "r = " << color(0) << ", g = " << color(1) << ", b = " << color(2) << std::endl;
+  
+  return 0;
+}
+```
 
 ## Available Colormaps
 
