@@ -5,21 +5,27 @@ A tiny header-only library for colormaps written in C++11
 
 - Eigen http://eigen.tuxfamily.org/
 
-## Colormaps
+## Available Colormaps
 
 ### Matlab
-- Heat
-- Jet
-- Hot
-- Gray
+
+| Name     | Sample                         |
+|:--------:|:------------------------------:|
+| Heat     | ![](docs/samples/Heat.png)     |
+| Hot      | ![](docs/samples/Hot.png)      |
+| Jet      | ![](docs/samples/Jet.png)      |
+| Gray     | ![](docs/samples/Gray.png)     |
 
 Reference: https://www.mathworks.com/help/matlab/ref/colormap.html
 
 ### mpl colormaps (Matplotlib)
-- Magma
-- Inferno
-- Plasma
-- Viridis
+
+| Name     | Sample                         |
+|:--------:|:------------------------------:|
+| Magma    | ![](docs/samples/Magma.png)    |
+| Inferno  | ![](docs/samples/Inferno.png)  |
+| Plasma   | ![](docs/samples/Plasma.png)   |
+| Viridis  | ![](docs/samples/Viridis.png)  |
 
 These colormaps are designed to be perceptually uniform (even in black-and-white printing) and friendly to colorblindness.
 
