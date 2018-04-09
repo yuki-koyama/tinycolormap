@@ -12,8 +12,8 @@ int main(int argc, char* argv[])
 
     const std::string save_directory_path = argv[1];
 
-    constexpr int width  = 600;
-    constexpr int height = 60;
+    constexpr int width  = 300;
+    constexpr int height = 30;
     
     const std::vector<std::pair<tinycolormap::ColorMapType, std::string>> color_map_types
     {
