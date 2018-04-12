@@ -1,7 +1,7 @@
 # tinycolormap
 A header-only, single-file library for colormaps written in C++11
 
-## Dependencies
+## Dependency
 
 - Eigen http://eigen.tuxfamily.org/
 
@@ -64,5 +64,7 @@ This colormap is designed to mimic the color scheme used in GitHub contributions
 
 ## Projects using tinycolormap
 
-- sequential_line_search (SIGGRAPH 2017) https://github.com/yuki-koyama/sequential-line-search
-- selph (CHI 2016) https://github.com/yuki-koyama/selph
+- OptiMo (CHI 2018)
+- Sequential Line Search (SIGGRAPH 2017) https://github.com/yuki-koyama/sequential-line-search
+- SelPh (CHI 2016) https://github.com/yuki-koyama/selph
+- VisOpt Slider (UIST 2014)
