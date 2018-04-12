@@ -5,10 +5,10 @@ set(CMAKE_CXX_STANDARD 11)
 
 install(FILES ./include/tinycolormap.h DESTINATION include)
 
-option(TINYCOLORMAP_BUILD_DEMOS "build demos" OFF)
+option(TINYCOLORMAP_BUILD_TOOLS "Build tools" OFF)
 
-if(TINYCOLORMAP_BUILD_DEMOS)
-	add_subdirectory(demos/png-exporter)
+if(TINYCOLORMAP_BUILD_TOOLS)
+	add_subdirectory(tools/png-exporter)
 
 	enable_testing()
 	add_test(NAME png-exporter COMMAND $<TARGET_FILE:png-exporter> ${CMAKE_BINARY_DIR})
