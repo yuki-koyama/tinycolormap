@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
         { tinycolormap::ColorMapType::Inferno, "Inferno" },
         { tinycolormap::ColorMapType::Plasma,  "Plasma"  },
         { tinycolormap::ColorMapType::Viridis, "Viridis" },
+        { tinycolormap::ColorMapType::Github,  "Github"  },
     };
 
     for (const auto& color_map_type : color_map_types)

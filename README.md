@@ -54,6 +54,14 @@ The original colormaps are released under CC0 by Nathaniel J. Smith, Stefan van 
 
 Reference: https://bids.github.io/colormap/
 
+### GitHub
+
+| Name     | Sample                         |
+|:--------:|:------------------------------:|
+| Github   | ![](docs/samples/Github.png)   |
+
+This colormap is designed to mimic the color scheme used in GitHub contributions visualization.
+
 ## Projects using tinycolormap
 
 - sequential_line_search (SIGGRAPH 2017) https://github.com/yuki-koyama/sequential-line-search
