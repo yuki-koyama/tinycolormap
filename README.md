@@ -62,6 +62,16 @@ Reference: https://bids.github.io/colormap/
 
 This colormap is designed to mimic the color scheme used in GitHub contributions visualization.
 
+## Tools (Optional)
+
+### PNG Exporter
+
+This tool exports all the available colormaps as PNG images.
+
+#### Additional Dependency
+
+- Qt5 http://doc.qt.io/qt-5/
+
 ## Projects using tinycolormap
 
 - OptiMo (CHI 2018)
