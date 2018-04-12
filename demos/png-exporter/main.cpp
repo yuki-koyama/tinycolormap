@@ -15,27 +15,28 @@ int main(int argc, char* argv[])
     constexpr int width  = 300;
     constexpr int height = 30;
     
-    const std::vector<std::pair<tinycolormap::ColorMapType, std::string>> color_map_types
+    const std::vector<std::pair<tinycolormap::ColormapType, std::string>> colormap_types
     {
-        { tinycolormap::ColorMapType::Heat,    "Heat"    },
-        { tinycolormap::ColorMapType::Jet,     "Jet"     },
-        { tinycolormap::ColorMapType::Hot,     "Hot"     },
-        { tinycolormap::ColorMapType::Gray,    "Gray"    },
-        { tinycolormap::ColorMapType::Magma,   "Magma"   },
-        { tinycolormap::ColorMapType::Inferno, "Inferno" },
-        { tinycolormap::ColorMapType::Plasma,  "Plasma"  },
-        { tinycolormap::ColorMapType::Viridis, "Viridis" },
-        { tinycolormap::ColorMapType::Github,  "Github"  },
+        { tinycolormap::ColormapType::Heat,    "Heat"    },
+        { tinycolormap::ColormapType::Jet,     "Jet"     },
+        { tinycolormap::ColormapType::Hot,     "Hot"     },
+        { tinycolormap::ColormapType::Gray,    "Gray"    },
+        { tinycolormap::ColormapType::Magma,   "Magma"   },
+        { tinycolormap::ColormapType::Inferno, "Inferno" },
+        { tinycolormap::ColormapType::Plasma,  "Plasma"  },
+        { tinycolormap::ColormapType::Viridis, "Viridis" },
+        { tinycolormap::ColormapType::Github,  "Github"  },
     };
 
-    for (const auto& color_map_type : color_map_types)
+    for (const auto& colormap_type : colormap_types)
     {
         QImage image(width, height, QImage::Format_ARGB32);
         
         for (int x = 0; x < width; ++ x)
         {
             const double          value = static_cast<double>(x) / static_cast<double>(width - 1);
-            const Eigen::Vector3d color = tinycolormap::GetColor(value, color_map_type.first);
+            const double v = value;// + 0.05 * std::sin(value * 200.0);
+            const Eigen::Vector3d color = tinycolormap::GetColor(v, colormap_type.first);
             
             for (int y = 0; y < height; ++ y)
             {
@@ -43,7 +44,7 @@ int main(int argc, char* argv[])
             }
         }
         
-        image.save(QString::fromStdString(save_directory_path + "/" + color_map_type.second + ".png"));
+        image.save(QString::fromStdString(save_directory_path + "/" + colormap_type.second + ".png"));
     }
     
     return 0;

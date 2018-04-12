@@ -34,12 +34,12 @@ namespace tinycolormap
     // API Definitions
     //////////////////////////////////////////////////////////////////////////////////
     
-    enum class ColorMapType
+    enum class ColormapType
     {
         Heat, Jet, Hot, Gray, Magma, Inferno, Plasma, Viridis, Github
     };
     
-    inline Eigen::Vector3d GetColor(double x, ColorMapType type = ColorMapType::Viridis);
+    inline Eigen::Vector3d GetColor(double x, ColormapType type = ColormapType::Viridis);
     inline Eigen::Vector3d GetHeatColor(double x);
     inline Eigen::Vector3d GetJetColor(double x);
     inline Eigen::Vector3d GetHotColor(double x);
@@ -54,27 +54,27 @@ namespace tinycolormap
     // Implementation
     //////////////////////////////////////////////////////////////////////////////////
     
-    inline Eigen::Vector3d GetColor(double x, ColorMapType type)
+    inline Eigen::Vector3d GetColor(double x, ColormapType type)
     {
         switch (type)
         {
-            case ColorMapType::Heat:
+            case ColormapType::Heat:
                 return GetHeatColor(x);
-            case ColorMapType::Jet:
+            case ColormapType::Jet:
                 return GetJetColor(x);
-            case ColorMapType::Hot:
+            case ColormapType::Hot:
                 return GetHotColor(x);
-            case ColorMapType::Gray:
+            case ColormapType::Gray:
                 return GetGrayColor(x);
-            case ColorMapType::Magma:
+            case ColormapType::Magma:
                 return GetMagmaColor(x);
-            case ColorMapType::Inferno:
+            case ColormapType::Inferno:
                 return GetInfernoColor(x);
-            case ColorMapType::Plasma:
+            case ColormapType::Plasma:
                 return GetPlasmaColor(x);
-            case ColorMapType::Viridis:
+            case ColormapType::Viridis:
                 return GetViridisColor(x);
-            case ColorMapType::Github:
+            case ColormapType::Github:
                 return GetGithubColor(x);
             default:
                 break;

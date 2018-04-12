@@ -1,5 +1,5 @@
 # tinycolormap
-A tiny header-only library for color maps written in C++11
+A header-only, single-file library for colormaps written in C++11
 
 ## Dependencies
 
