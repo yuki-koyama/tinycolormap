@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(tinycolormap)
+project(tinycolormap CXX)
 set(CMAKE_CXX_STANDARD 11)
 
 install(FILES ./include/tinycolormap.h DESTINATION include)
