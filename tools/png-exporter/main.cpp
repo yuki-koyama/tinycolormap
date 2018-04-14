@@ -35,8 +35,7 @@ int main(int argc, char* argv[])
         for (int x = 0; x < width; ++ x)
         {
             const double          value = static_cast<double>(x) / static_cast<double>(width - 1);
-            const double v = value;// + 0.05 * std::sin(value * 200.0);
-            const Eigen::Vector3d color = tinycolormap::GetColor(v, colormap_type.first);
+            const Eigen::Vector3d color = tinycolormap::GetColor(value, colormap_type.first);
             
             for (int y = 0; y < height; ++ y)
             {
