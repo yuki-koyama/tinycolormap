@@ -5,27 +5,6 @@ A header-only, single-file library for colormaps written in C++11
 
 - Eigen http://eigen.tuxfamily.org/
 
-## Sample Code
-
-```
-#include <iostream>
-#include <tinycolormap.h>
-
-int main()
-{
-  // Define a target value. This value should be in [0, 1]; otherwise, it will be cropped to 0 or 1.
-  const double value = 0.5;
-  
-  // Get the color as a 3-dimensional double-valued vector. Here, Viridis is specified as a colormap.
-  const Eigen::Vector3d color = tinycolormap::GetColor(value, tinycolormap::ColorMapType::Viridis);
-  
-  // Print the RGB values. Each value is in [0, 1].
-  std::cout << "r = " << color(0) << ", g = " << color(1) << ", b = " << color(2) << std::endl;
-  
-  return 0;
-}
-```
-
 ## Available Colormaps
 
 ### Matlab
@@ -62,15 +41,53 @@ Reference: https://bids.github.io/colormap/
 
 This colormap is designed to mimic the color scheme used in GitHub contributions visualization.
 
+## Installation
+
+tinycolormap is a header-only library, so you do not need to compile it. You can use it by 
+- Adding the path to the `include` directory of tinycolormap to your project's include paths, or
+- Copying the file `tinycolormap.h` to your project (note that tinycolormap consists of only that single file).
+
 ## Tools (Optional)
 
-### PNG Exporter
+This repository includes the following optional tools: 
+- PNG Exporter: This tool exports all the available colormaps as PNG images.
 
-This tool exports all the available colormaps as PNG images.
-
-#### Additional Dependency
+### Additional Dependency
 
 - Qt5 http://doc.qt.io/qt-5/
+
+### Build Instruction
+
+The optional tools are managed by CMake https://cmake.org/ . They can be built by, for example, 
+```
+mkdir build
+cd build
+cmake [PATH_TO_TINYCOLORMAP] -DTINYCOLORMAP_BUILD_TOOLS=ON
+make
+```
+
+Tips: if CMake could not find Qt5, it needs to specify the path to Qt5 explicitly by adding an option: `-DCMAKE_PREFIX_PATH=[PATH_TO_Qt5]`.
+
+## Sample Code
+
+```
+#include <iostream>
+#include <tinycolormap.h>
+
+int main()
+{
+  // Define a target value. This value should be in [0, 1]; otherwise, it will be cropped to 0 or 1.
+  const double value = 0.5;
+  
+  // Get the color as a 3-dimensional double-valued vector. Here, Viridis is specified as a colormap.
+  const Eigen::Vector3d color = tinycolormap::GetColor(value, tinycolormap::ColorMapType::Viridis);
+  
+  // Print the RGB values. Each value is in [0, 1].
+  std::cout << "r = " << color(0) << ", g = " << color(1) << ", b = " << color(2) << std::endl;
+  
+  return 0;
+}
+```
 
 ## Projects using tinycolormap
 
