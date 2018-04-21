@@ -1,9 +1,6 @@
 # tinycolormap
-A header-only, single-file library for colormaps written in C++11
 
-## Dependency
-
-- Eigen http://eigen.tuxfamily.org/
+A header-only, single-file library for colormaps written in C++11.
 
 ## Available Colormaps
 
@@ -16,7 +13,7 @@ A header-only, single-file library for colormaps written in C++11
 | Jet      | ![](docs/samples/Jet.png)      |
 | Gray     | ![](docs/samples/Gray.png)     |
 
-Reference: https://www.mathworks.com/help/matlab/ref/colormap.html
+Reference: <https://www.mathworks.com/help/matlab/ref/colormap.html>
 
 ### mpl colormaps (Matplotlib)
 
@@ -29,9 +26,9 @@ Reference: https://www.mathworks.com/help/matlab/ref/colormap.html
 
 These colormaps are designed to be perceptually uniform (even in black-and-white printing) and friendly to colorblindness.
 
-The original colormaps are released under CC0 by Nathaniel J. Smith, Stefan van der Walt, and (in the case of viridis) Eric Firing: https://github.com/BIDS/colormap/blob/master/colormaps.py . Their python code is adapted for the use in C++11.
+The original colormaps are released under CC0 by Nathaniel J. Smith, Stefan van der Walt, and (in the case of viridis) Eric Firing: <https://github.com/BIDS/colormap/blob/master/colormaps.py>. Their python code is adapted for the use in C++11.
 
-Reference: https://bids.github.io/colormap/
+Reference: <https://bids.github.io/colormap/>
 
 ### GitHub
 
@@ -41,24 +38,30 @@ Reference: https://bids.github.io/colormap/
 
 This colormap is designed to mimic the color scheme used in GitHub contributions visualization.
 
+## Dependency
+
+- Eigen <http://eigen.tuxfamily.org/>
+
 ## Installation
 
 tinycolormap is a header-only library, so you do not need to compile it. You can use it by 
 - Adding the path to the `include` directory of tinycolormap to your project's include paths, or
 - Copying the file `tinycolormap.h` to your project (note that tinycolormap consists of only that single file).
 
+If your project is managed by Cmake <https://cmake.org/>, then the `ExternalProject_Add` is useful as tinycolormap provides `CMakeLists.txt` for this purpose.
+
 ## Tools (Optional)
 
 This repository includes the following optional tools: 
-- PNG Exporter: This tool exports all the available colormaps as PNG images.
+- PNG Exporter: This tool exports all the available colormaps as PNG images. 
 
 ### Additional Dependency
 
-- Qt5 http://doc.qt.io/qt-5/
+- Qt5 <http://doc.qt.io/qt-5/>
 
-### Build Instruction
+### Tools Build Instruction
 
-The optional tools are managed by CMake https://cmake.org/ . They can be built by, for example, 
+The optional tools are managed by CMake <https://cmake.org/>. They can be built by, for example, 
 ```
 mkdir build
 cd build
@@ -92,6 +95,12 @@ int main()
 ## Projects using tinycolormap
 
 - OptiMo (CHI 2018)
-- Sequential Line Search (SIGGRAPH 2017) https://github.com/yuki-koyama/sequential-line-search
-- SelPh (CHI 2016) https://github.com/yuki-koyama/selph
+- Sequential Line Search (SIGGRAPH 2017) <https://github.com/yuki-koyama/sequential-line-search>
+- SelPh (CHI 2016) <https://github.com/yuki-koyama/selph>
 - VisOpt Slider (UIST 2014)
+
+## Contribute
+
+Pull requests are welcome.
+
+
