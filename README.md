@@ -46,7 +46,7 @@ This colormap is designed to mimic the color scheme used in GitHub contributions
 
 tinycolormap is a header-only library, so you do not need to compile it. You can use it by 
 - Adding the path to the `include` directory of tinycolormap to your project's include paths, or
-- Copying the file `tinycolormap.h` to your project (note that tinycolormap consists of only that single file).
+- Copying the file `tinycolormap.hpp` to your project (note that tinycolormap consists of only that single file).
 
 If your project is managed by Cmake <https://cmake.org/>, then the `ExternalProject_Add` is useful as tinycolormap provides `CMakeLists.txt` for this purpose.
 
@@ -75,7 +75,7 @@ Tips: if CMake could not find Qt5, it needs to specify the path to Qt5 explicitl
 
 ```
 #include <iostream>
-#include <tinycolormap.h>
+#include <tinycolormap.hpp>
 
 int main()
 {

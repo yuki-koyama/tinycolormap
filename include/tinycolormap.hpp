@@ -22,8 +22,8 @@
  SOFTWARE.
  */
 
-#ifndef TINYCOLORMAP_H_
-#define TINYCOLORMAP_H_
+#ifndef TINYCOLORMAP_HPP_
+#define TINYCOLORMAP_HPP_
 
 #include <cmath>
 #include <Eigen/Core>

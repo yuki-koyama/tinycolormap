@@ -1,6 +1,6 @@
 #include <iostream>
 #include <QImage>
-#include <tinycolormap.h>
+#include <tinycolormap.hpp>
 
 int main(int argc, char* argv[])
 {
