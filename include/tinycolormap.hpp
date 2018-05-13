@@ -117,45 +117,23 @@ namespace tinycolormap
     {
         x = std::max(0.0, std::min(1.0, x));
         
-        double r, g, b;
+        const Eigen::MatrixXd data = (Eigen::MatrixXd(9, 3) <<
+                                      0.0, 0.0, 0.5,
+                                      0.0, 0.0, 1.0,
+                                      0.0, 0.5, 1.0,
+                                      0.0, 1.0, 1.0,
+                                      0.5, 1.0, 0.5,
+                                      1.0, 1.0, 0.0,
+                                      1.0, 0.5, 0.0,
+                                      1.0, 0.0, 0.0,
+                                      0.5, 0.0, 0.0).finished();
         
-        constexpr double r_max = 0.8;
-        constexpr double g_max = 1.0;
-        constexpr double b_max = 1.0;
-        
-        constexpr double t = 0.125;
-        
-        if (x < t)
-        {
-            r = 0;
-            g = 0;
-            b = b_max * (0.5 + x / t * 0.5);
-        }
-        else if (x < 3.0 * t)
-        {
-            r = 0;
-            g = g_max * (x - t) / (3.0 * t - t);
-            b = b_max;
-        }
-        else if (x < 5.0 * t)
-        {
-            r = r_max * (x - 3.0 * t) / (5.0 * t - 3.0 * t);
-            g = g_max;
-            b = (b_max - (x - 3.0 * t) / (5.0 * t - 3.0 * t));
-        }
-        else if (x < 7.0 * t)
-        {
-            r = r_max;
-            g = (g_max - (x - 5.0 * t) / (7.0 * t - 5.0 * t));
-            b = 0;
-        }
-        else
-        {
-            r = (r_max - (x - 7.0 * t) / (1.0 - 7.0 * t) * 0.5);
-            g = 0;
-            b = 0;
-        }
-        return Eigen::Vector3d(r, g, b);
+        const double          a  = x * (data.rows() - 1);
+        const double          t  = a - std::floor(a);
+        const Eigen::Vector3d c0 = data.row(std::floor(a)).transpose();
+        const Eigen::Vector3d c1 = data.row(std::ceil (a)).transpose();
+
+        return (1.0 - t) * c0 + t * c1;
     }
     
     inline Eigen::Vector3d GetHotColor(double x)
