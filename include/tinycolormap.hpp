@@ -84,33 +84,20 @@ namespace tinycolormap
     inline Eigen::Vector3d GetHeatColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
+
+        const Eigen::MatrixXd data = (Eigen::MatrixXd(5, 3) <<
+                                      0.0, 0.0, 1.0,
+                                      0.0, 1.0, 1.0,
+                                      0.0, 1.0, 0.0,
+                                      1.0, 1.0, 0.0,
+                                      1.0, 0.0, 0.0).finished();
         
-        const Eigen::Vector3d r(1.0, 0.0, 0.0);
-        const Eigen::Vector3d y(1.0, 1.0, 0.0);
-        const Eigen::Vector3d g(0.0, 1.0, 0.0);
-        const Eigen::Vector3d c(0.0, 1.0, 1.0);
-        const Eigen::Vector3d b(0.0, 0.0, 1.0);
-        
-        if (x < 0.25)
-        {
-            const double t = x * 4.0;
-            return t * c + (1.0 - t) * b;
-        }
-        else if (x < 0.50)
-        {
-            const double t = (x - 0.25) * 4.0;
-            return t * g + (1.0 - t) * c;
-        }
-        else if (x < 0.75)
-        {
-            const double t = (x - 0.50) * 4.0;
-            return t * y + (1.0 - t) * g;
-        }
-        else
-        {
-            const double t = (x - 0.75) * 4.0;
-            return t * r + (1.0 - t) * y;
-        }
+        const double          a  = x * (data.rows() - 1);
+        const double          t  = a - std::floor(a);
+        const Eigen::Vector3d c0 = data.row(std::floor(a)).transpose();
+        const Eigen::Vector3d c1 = data.row(std::ceil (a)).transpose();
+
+        return (1.0 - t) * c0 + t * c1;
     }
     
     inline Eigen::Vector3d GetJetColor(double x)
@@ -1235,33 +1222,20 @@ namespace tinycolormap
     inline Eigen::Vector3d GetGithubColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
+
+        const Eigen::MatrixXd data = (Eigen::MatrixXd(5, 3) <<
+                                      0.933333, 0.933333, 0.933333,
+                                      0.776470, 0.894117, 0.545098,
+                                      0.482352, 0.788235, 0.435294,
+                                      0.137254, 0.603921, 0.231372,
+                                      0.098039, 0.380392, 0.152941).finished();
         
-        const Eigen::Vector3d color0(0.933333, 0.933333, 0.933333);
-        const Eigen::Vector3d color1(0.776470, 0.894117, 0.545098);
-        const Eigen::Vector3d color2(0.482352, 0.788235, 0.435294);
-        const Eigen::Vector3d color3(0.137254, 0.603921, 0.231372);
-        const Eigen::Vector3d color4(0.098039, 0.380392, 0.152941);
-        
-        if (x < 0.25)
-        {
-            const double t = x * 4.0;
-            return t * color1 + (1.0 - t) * color0;
-        }
-        else if (x < 0.50)
-        {
-            const double t = (x - 0.25) * 4.0;
-            return t * color2 + (1.0 - t) * color1;
-        }
-        else if (x < 0.75)
-        {
-            const double t = (x - 0.50) * 4.0;
-            return t * color3 + (1.0 - t) * color2;
-        }
-        else
-        {
-            const double t = (x - 0.75) * 4.0;
-            return t * color4 + (1.0 - t) * color3;
-        }
+        const double          a  = x * (data.rows() - 1);
+        const double          t  = a - std::floor(a);
+        const Eigen::Vector3d c0 = data.row(std::floor(a)).transpose();
+        const Eigen::Vector3d c1 = data.row(std::ceil (a)).transpose();
+
+        return (1.0 - t) * c0 + t * c1;
     }
 }
 
