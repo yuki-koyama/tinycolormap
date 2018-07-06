@@ -40,7 +40,7 @@ This colormap is designed to mimic the color scheme used in GitHub contributions
 
 ## Dependency
 
-- Eigen <http://eigen.tuxfamily.org/>
+tinycolormap does not have any dependencies except for C++11 standard library.
 
 ## Installation
 
