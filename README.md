@@ -15,7 +15,7 @@ A header-only, single-file library for colormaps written in C++11.
 
 Reference: <https://www.mathworks.com/help/matlab/ref/colormap.html>
 
-### mpl colormaps (Matplotlib)
+### Matplotlib
 
 | Name     | Sample                         |
 |:--------:|:------------------------------:|
