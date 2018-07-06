@@ -34,12 +34,12 @@ int main(int argc, char* argv[])
         
         for (int x = 0; x < width; ++ x)
         {
-            const double          value = static_cast<double>(x) / static_cast<double>(width - 1);
-            const Eigen::Vector3d color = tinycolormap::GetColor(value, colormap_type.first);
+            const double              value = static_cast<double>(x) / static_cast<double>(width - 1);
+            const tinycolormap::Color color = tinycolormap::GetColor(value, colormap_type.first);
             
             for (int y = 0; y < height; ++ y)
             {
-                image.setPixel(x, y, qRgba(color(0) * 255.0, color(1) * 255.0, color(2) * 255.0, 255));
+                image.setPixel(x, y, qRgba(color.r() * 255.0, color.g() * 255.0, color.b() * 255.0, 255));
             }
         }
         
