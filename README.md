@@ -83,10 +83,10 @@ int main()
   const double value = 0.5;
   
   // Get the color as a 3-dimensional double-valued vector. Here, Viridis is specified as a colormap.
-  const Eigen::Vector3d color = tinycolormap::GetColor(value, tinycolormap::ColormapType::Viridis);
+  const tinycolormap::Color color = tinycolormap::GetColor(value, tinycolormap::ColormapType::Viridis);
   
   // Print the RGB values. Each value is in [0, 1].
-  std::cout << "r = " << color(0) << ", g = " << color(1) << ", b = " << color(2) << std::endl;
+  std::cout << "r = " << color.r() << ", g = " << color.g() << ", b = " << color.b() << std::endl;
   
   return 0;
 }
