@@ -42,7 +42,7 @@ namespace tinycolormap
     
     struct Color
     {
-        Color(double r, double g, double b) : data({{ r, g, b }}) {}
+        constexpr Color(double r, double g, double b) : data({{ r, g, b }}) {}
         
         std::array<double, 3> data;
         
@@ -191,7 +191,7 @@ namespace tinycolormap
     {
         x = std::max(0.0, std::min(1.0, x));
         
-        const std::vector<Color> data =
+        constexpr Color data[] =
         {
             { 0.001462, 0.000466, 0.013866 },
             { 0.002258, 0.001295, 0.018331 },
@@ -451,14 +451,14 @@ namespace tinycolormap
             { 0.987053, 0.991438, 0.749504 }
         };
         
-        return data[std::round(x * 255.0)];
+        return data[(size_t)std::round(x * 255.0)];
     }
     
     inline Color GetInfernoColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
-        const std::vector<Color> data =
+
+        constexpr Color data[] =
         {
             { 0.001462, 0.000466, 0.013866 },
             { 0.002267, 0.001270, 0.018570 },
@@ -718,14 +718,14 @@ namespace tinycolormap
             { 0.988362, 0.998364, 0.644924 }
         };
         
-        return data[std::round(x * 255.0)];
+        return data[(size_t)std::round(x * 255.0)];
     }
 
     inline Color GetPlasmaColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
-        const std::vector<Color> data =
+
+        constexpr Color data[] =
         {
             { 0.050383, 0.029803, 0.527975 },
             { 0.063536, 0.028426, 0.533124 },
@@ -985,14 +985,14 @@ namespace tinycolormap
             { 0.940015, 0.975158, 0.131326 }
         };
         
-        return data[std::round(x * 255.0)];
+        return data[(size_t)std::round(x * 255.0)];
     }
     
     inline Color GetViridisColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
-        const std::vector<Color> data =
+
+        constexpr Color data[] =
         {
             { 0.267004, 0.004874, 0.329415 },
             { 0.268510, 0.009605, 0.335427 },
@@ -1252,7 +1252,7 @@ namespace tinycolormap
             { 0.993248, 0.906157, 0.143936 }
         };
         
-        return data[std::round(x * 255.0)];
+        return data[(size_t)std::round(x * 255.0)];
     }
     
     inline Color GetGithubColor(double x)
