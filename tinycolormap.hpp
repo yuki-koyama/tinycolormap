@@ -26,7 +26,6 @@
 #define TINYCOLORMAP_HPP_
 
 #include <cmath>
-#include <vector>
 #include <array>
 
 namespace tinycolormap
