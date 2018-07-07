@@ -52,7 +52,7 @@ namespace tinycolormap
         const double& r() const { return data[0]; }
         const double& g() const { return data[1]; }
         const double& b() const { return data[2]; }
-
+        
         double& operator[](size_t n) { return data[n]; }
         const double& operator[](size_t n) const { return data[n]; }
     };
@@ -67,7 +67,7 @@ namespace tinycolormap
     inline Color GetPlasmaColor(double x);
     inline Color GetViridisColor(double x);
     inline Color GetGithubColor(double x);
-
+    
     //////////////////////////////////////////////////////////////////////////////////
     // Implementation
     //////////////////////////////////////////////////////////////////////////////////
@@ -112,8 +112,8 @@ namespace tinycolormap
     inline Color GetHeatColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-
-        const std::vector<Color> data =
+        
+        constexpr Color data[] =
         {
             { 0.0, 0.0, 1.0 },
             { 0.0, 1.0, 1.0 },
@@ -121,12 +121,12 @@ namespace tinycolormap
             { 1.0, 1.0, 0.0 },
             { 1.0, 0.0, 0.0 }
         };
-
-        const double a  = x * (data.size() - 1);
+        
+        const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
         const double t  = a - std::floor(a);
-        const Color  c0 = data[std::floor(a)];
-        const Color  c1 = data[std::ceil (a)];
-
+        const Color  c0 = data[(size_t)std::floor(a)];
+        const Color  c1 = data[(size_t)std::ceil (a)];
+        
         return (1.0 - t) * c0 + t * c1;
     }
     
@@ -134,7 +134,7 @@ namespace tinycolormap
     {
         x = std::max(0.0, std::min(1.0, x));
         
-        const std::vector<Color> data =
+        constexpr Color data[] =
         {
             { 0.0, 0.0, 0.5 },
             { 0.0, 0.0, 1.0 },
@@ -147,10 +147,10 @@ namespace tinycolormap
             { 0.5, 0.0, 0.0 }
         };
         
-        const double a  = x * (data.size() - 1);
+        const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
         const double t  = a - std::floor(a);
-        const Color  c0 = data[std::floor(a)];
-        const Color  c1 = data[std::ceil (a)];
+        const Color  c0 = data[(size_t)std::floor(a)];
+        const Color  c1 = data[(size_t)std::ceil (a)];
 
         return (1.0 - t) * c0 + t * c1;
     }
@@ -159,9 +159,9 @@ namespace tinycolormap
     {
         x = std::max(0.0, std::min(1.0, x));
         
-        const Color r{ 1.0, 0.0, 0.0 };
-        const Color g{ 0.0, 1.0, 0.0 };
-        const Color b{ 0.0, 0.0, 1.0 };
+        constexpr Color r{ 1.0, 0.0, 0.0 };
+        constexpr Color g{ 0.0, 1.0, 0.0 };
+        constexpr Color b{ 0.0, 0.0, 1.0 };
         
         if (x < 0.4)
         {
@@ -186,7 +186,7 @@ namespace tinycolormap
         
         return (1.0 - x) * Color{ 1.0, 1.0, 1.0 };
     }
-
+    
     inline Color GetMagmaColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
@@ -457,7 +457,7 @@ namespace tinycolormap
     inline Color GetInfernoColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-
+        
         constexpr Color data[] =
         {
             { 0.001462, 0.000466, 0.013866 },
@@ -720,11 +720,11 @@ namespace tinycolormap
         
         return data[(size_t)std::round(x * 255.0)];
     }
-
+    
     inline Color GetPlasmaColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-
+        
         constexpr Color data[] =
         {
             { 0.050383, 0.029803, 0.527975 },
@@ -991,7 +991,7 @@ namespace tinycolormap
     inline Color GetViridisColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-
+        
         constexpr Color data[] =
         {
             { 0.267004, 0.004874, 0.329415 },
@@ -1258,8 +1258,8 @@ namespace tinycolormap
     inline Color GetGithubColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-
-        const std::vector<Color> data =
+        
+        constexpr Color data[] =
         {
             { 0.933333, 0.933333, 0.933333 },
             { 0.776470, 0.894117, 0.545098 },
@@ -1268,11 +1268,11 @@ namespace tinycolormap
             { 0.098039, 0.380392, 0.152941 }
         };
         
-        const double a  = x * (data.size() - 1);
+        const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
         const double t  = a - std::floor(a);
-        const Color  c0 = data[std::floor(a)];
-        const Color  c1 = data[std::ceil (a)];
-        
+        const Color  c0 = data[(size_t)std::floor(a)];
+        const Color  c1 = data[(size_t)std::ceil (a)];
+
         return (1.0 - t) * c0 + t * c1;
     }
 }
