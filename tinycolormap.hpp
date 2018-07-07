@@ -125,7 +125,7 @@ namespace tinycolormap
         const double t  = a - std::floor(a);
         const Color  c0 = data[static_cast<size_t>(std::floor(a))];
         const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
-
+        
         return (1.0 - t) * c0 + t * c1;
     }
     
@@ -150,7 +150,7 @@ namespace tinycolormap
         const double t  = a - std::floor(a);
         const Color  c0 = data[static_cast<size_t>(std::floor(a))];
         const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
-
+        
         return (1.0 - t) * c0 + t * c1;
     }
     
@@ -1271,7 +1271,7 @@ namespace tinycolormap
         const double t  = a - std::floor(a);
         const Color  c0 = data[static_cast<size_t>(std::floor(a))];
         const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
-
+        
         return (1.0 - t) * c0 + t * c1;
     }
 }
