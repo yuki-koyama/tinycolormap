@@ -124,9 +124,9 @@ namespace tinycolormap
         
         const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
         const double t  = a - std::floor(a);
-        const Color  c0 = data[(size_t)std::floor(a)];
-        const Color  c1 = data[(size_t)std::ceil (a)];
-        
+        const Color  c0 = data[static_cast<size_t>(std::floor(a))];
+        const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
+
         return (1.0 - t) * c0 + t * c1;
     }
     
@@ -149,8 +149,8 @@ namespace tinycolormap
         
         const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
         const double t  = a - std::floor(a);
-        const Color  c0 = data[(size_t)std::floor(a)];
-        const Color  c1 = data[(size_t)std::ceil (a)];
+        const Color  c0 = data[static_cast<size_t>(std::floor(a))];
+        const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
 
         return (1.0 - t) * c0 + t * c1;
     }
@@ -451,7 +451,7 @@ namespace tinycolormap
             { 0.987053, 0.991438, 0.749504 }
         };
         
-        return data[(size_t)std::round(x * 255.0)];
+        return data[static_cast<size_t>(std::round(x * 255.0))];
     }
     
     inline Color GetInfernoColor(double x)
@@ -718,7 +718,7 @@ namespace tinycolormap
             { 0.988362, 0.998364, 0.644924 }
         };
         
-        return data[(size_t)std::round(x * 255.0)];
+        return data[static_cast<size_t>(std::round(x * 255.0))];
     }
     
     inline Color GetPlasmaColor(double x)
@@ -985,7 +985,7 @@ namespace tinycolormap
             { 0.940015, 0.975158, 0.131326 }
         };
         
-        return data[(size_t)std::round(x * 255.0)];
+        return data[static_cast<size_t>(std::round(x * 255.0))];
     }
     
     inline Color GetViridisColor(double x)
@@ -1252,7 +1252,7 @@ namespace tinycolormap
             { 0.993248, 0.906157, 0.143936 }
         };
         
-        return data[(size_t)std::round(x * 255.0)];
+        return data[static_cast<size_t>(std::round(x * 255.0))];
     }
     
     inline Color GetGithubColor(double x)
@@ -1270,8 +1270,8 @@ namespace tinycolormap
         
         const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
         const double t  = a - std::floor(a);
-        const Color  c0 = data[(size_t)std::floor(a)];
-        const Color  c1 = data[(size_t)std::ceil (a)];
+        const Color  c0 = data[static_cast<size_t>(std::floor(a))];
+        const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
 
         return (1.0 - t) * c0 + t * c1;
     }
