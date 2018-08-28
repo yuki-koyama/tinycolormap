@@ -45,14 +45,16 @@ tinycolormap does not have any dependencies except for C++11 standard library.
 ## Installation
 
 tinycolormap is a header-only library, so you do not need to compile it. You can use it by 
-- Adding the path to the cloned tinycolormap repository to your project's include paths, or
+
+- Adding the path to the `include` directory in the cloned tinycolormap repository to your project's include paths, or
 - Copying the file `tinycolormap.hpp` to your project (note that tinycolormap consists of only that single file).
 
-If your project is managed by Cmake <https://cmake.org/>, then the `ExternalProject_Add` is useful as tinycolormap provides `CMakeLists.txt` for this purpose.
+If your project is managed by Cmake <https://cmake.org/>, `add_subdirectory` or `ExternalProject_Add` commands are useful as tinycolormap provides `CMakeLists.txt` for this purpose.
 
 ## Tools (Optional)
 
 This repository includes the following optional tools: 
+
 - PNG Exporter: This tool exports all the available colormaps as PNG images. 
 
 ### Additional Dependency
