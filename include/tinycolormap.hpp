@@ -71,12 +71,12 @@ namespace tinycolormap
     // Implementation
     //////////////////////////////////////////////////////////////////////////////////
     
-    Color operator+(const Color& c0, const Color& c1)
+    inline Color operator+(const Color& c0, const Color& c1)
     {
         return { c0[0] + c1[0], c0[1] + c1[1], c0[2] + c1[2] };
     }
     
-    Color operator*(double s, const Color& c)
+    inline Color operator*(double s, const Color& c)
     {
         return { s * c[0], s * c[1], s * c[2] };
     }
