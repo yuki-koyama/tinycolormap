@@ -54,6 +54,8 @@ namespace tinycolormap
         
         double& operator[](size_t n) { return data[n]; }
         const double& operator[](size_t n) const { return data[n]; }
+        double& operator()(size_t n) { return data[n]; }
+        const double& operator()(size_t n) const { return data[n]; }
     };
     
     inline Color GetColor(double x, ColormapType type = ColormapType::Viridis);
