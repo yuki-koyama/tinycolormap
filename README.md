@@ -96,6 +96,7 @@ int main()
 
 ## Projects using tinycolormap
 
+- Unblending (Pacific Graphics 2018) <https://github.com/yuki-koyama/unblending>
 - OptiMo (CHI 2018) <https://github.com/yuki-koyama/optimo>
 - Sequential Line Search (SIGGRAPH 2017) <https://github.com/yuki-koyama/sequential-line-search>
 - SelPh (CHI 2016) <https://github.com/yuki-koyama/selph>
