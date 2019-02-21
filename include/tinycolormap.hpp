@@ -27,6 +27,9 @@
 
 #include <cmath>
 #include <array>
+#if defined(TINYCOLORMAP_WITH_QT5)
+#include <QColor>
+#endif
 
 namespace tinycolormap
 {
@@ -56,6 +59,10 @@ namespace tinycolormap
         const double& operator[](size_t n) const { return data[n]; }
         double& operator()(size_t n) { return data[n]; }
         const double& operator()(size_t n) const { return data[n]; }
+
+#if defined(TINYCOLORMAP_WITH_QT5)
+        QColor ConvertToQColor() const { return QColor(data[0] * 255.0, data[1] * 255.0, data[2] * 255.0); }
+#endif
     };
     
     inline Color GetColor(double x, ColormapType type = ColormapType::Viridis);

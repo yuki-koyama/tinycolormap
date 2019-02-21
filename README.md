@@ -44,7 +44,7 @@ tinycolormap does not have any dependencies except for C++11 standard library.
 
 ## Installation
 
-tinycolormap is a header-only library, so you do not need to compile it. You can use it by 
+tinycolormap is a header-only library, so you do not need to compile it. You can use it by
 
 - Adding the path to the `include` directory in the cloned tinycolormap repository to your project's include paths, or
 - Copying the file `tinycolormap.hpp` to your project (note that tinycolormap consists of only that single file).
@@ -53,9 +53,9 @@ If your project is managed by Cmake <https://cmake.org/>, `add_subdirectory` or 
 
 ## Tools (Optional)
 
-This repository includes the following optional tools: 
+This repository includes the following optional tools:
 
-- PNG Exporter: This tool exports all the available colormaps as PNG images. 
+- PNG Exporter: This tool exports all the available colormaps as PNG images.
 
 ### Additional Dependency
 
@@ -63,7 +63,7 @@ This repository includes the following optional tools:
 
 ### Tools Build Instruction
 
-The optional tools are managed by CMake <https://cmake.org/>. They can be built by, for example, 
+The optional tools are managed by CMake <https://cmake.org/>. They can be built by, for example,
 ```
 mkdir build
 cd build
@@ -83,15 +83,29 @@ int main()
 {
   // Define a target value. This value should be in [0, 1]; otherwise, it will be cropped to 0 or 1.
   const double value = 0.5;
-  
+
   // Get the mapped color. Here, Viridis is specified as the colormap.
   const tinycolormap::Color color = tinycolormap::GetColor(value, tinycolormap::ColormapType::Viridis);
-  
+
   // Print the RGB values. Each value is in [0, 1].
   std::cout << "r = " << color.r() << ", g = " << color.g() << ", b = " << color.b() << std::endl;
-  
+
   return 0;
 }
+```
+
+## Options
+
+### Qt Support
+
+When `TINYCOLORMAP_WITH_QT5` is defined before including `tinycolormap.hpp`, for example,
+```
+#define TINYCOLORMAP_WITH_QT5
+#include <tinycolormap.hpp>
+```
+this library offers an additional utility function:
+```
+const QColor color = tinycolormap::GetColor(x).ConvertToQColor();
 ```
 
 ## Projects using tinycolormap
@@ -105,5 +119,3 @@ int main()
 ## Contribute
 
 Pull requests are welcome.
-
-
