@@ -1,5 +1,6 @@
 #include <iostream>
 #include <QImage>
+#define TINYCOLORMAP_WITH_QT5
 #include <tinycolormap.hpp>
 
 int main(int argc, char* argv[])
@@ -39,7 +40,7 @@ int main(int argc, char* argv[])
             
             for (int y = 0; y < height; ++ y)
             {
-                image.setPixel(x, y, qRgba(color.r() * 255.0, color.g() * 255.0, color.b() * 255.0, 255));
+                image.setPixelColor(x, y, color.ConvertToQColor());
             }
         }
         
