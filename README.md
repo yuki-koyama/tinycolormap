@@ -114,7 +114,7 @@ const QColor color = tinycolormap::GetColor(x).ConvertToQColor();
 - OptiMo (CHI 2018) <https://github.com/yuki-koyama/optimo>
 - Sequential Line Search (SIGGRAPH 2017) <https://github.com/yuki-koyama/sequential-line-search>
 - SelPh (CHI 2016) <https://github.com/yuki-koyama/selph>
-- VisOpt Slider (UIST 2014)
+- VisOpt Slider (UIST 2014) <https://github.com/yuki-koyama/visoptslider>
 
 ## Contribute
 
