@@ -64,7 +64,7 @@ This repository includes the following optional tools:
 ### Tools Build Instruction
 
 The optional tools are managed by CMake <https://cmake.org/>. They can be built by, for example,
-```
+```bash
 mkdir build
 cd build
 cmake [PATH_TO_TINYCOLORMAP] -DTINYCOLORMAP_BUILD_TOOLS=ON
@@ -75,7 +75,7 @@ Tips: if CMake could not find Qt5, it needs to specify the path to Qt5 explicitl
 
 ## Sample Code
 
-```
+```cpp
 #include <iostream>
 #include <tinycolormap.hpp>
 
@@ -99,12 +99,12 @@ int main()
 ### Qt Support
 
 When `TINYCOLORMAP_WITH_QT5` is defined before including `tinycolormap.hpp`, for example,
-```
+```cpp
 #define TINYCOLORMAP_WITH_QT5
 #include <tinycolormap.hpp>
 ```
 this library offers an additional utility function:
-```
+```cpp
 const QColor color = tinycolormap::GetColor(x).ConvertToQColor();
 ```
 
