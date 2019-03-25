@@ -27,8 +27,18 @@
 
 #include <cmath>
 #include <array>
+
+#if defined(TINYCOLORMAP_WITH_EIGEN)
+#include <Eigen/Core>
+#endif
+
 #if defined(TINYCOLORMAP_WITH_QT5)
 #include <QColor>
+#endif
+
+#if defined(TINYCOLORMAP_WITH_QT5) and defined(TINYCOLORMAP_WITH_EIGEN)
+#include <QImage>
+#include <QString>
 #endif
 
 namespace tinycolormap
@@ -63,6 +73,9 @@ namespace tinycolormap
 #if defined(TINYCOLORMAP_WITH_QT5)
         QColor ConvertToQColor() const { return QColor(data[0] * 255.0, data[1] * 255.0, data[2] * 255.0); }
 #endif
+#if defined(TINYCOLORMAP_WITH_EIGEN)
+        Eigen::Vector3d ConvertToEigen() const { return Eigen::Vector3d(data[0], data[1], data[2]); }
+#endif
     };
     
     inline Color GetColor(double x, ColormapType type = ColormapType::Viridis);
@@ -75,6 +88,11 @@ namespace tinycolormap
     inline Color GetPlasmaColor(double x);
     inline Color GetViridisColor(double x);
     inline Color GetGithubColor(double x);
+
+#if defined(TINYCOLORMAP_WITH_QT5) and defined(TINYCOLORMAP_WITH_EIGEN)
+    inline QImage CreateMatrixVisualization(const Eigen::MatrixXd& matrix);
+    inline void ExportMatrixVisualization(const Eigen::MatrixXd& matrix, const std::string& path);
+#endif
     
     //////////////////////////////////////////////////////////////////////////////////
     // Implementation
@@ -1283,6 +1301,34 @@ namespace tinycolormap
         
         return (1.0 - t) * c0 + t * c1;
     }
+
+#if defined(TINYCOLORMAP_WITH_QT5) and defined(TINYCOLORMAP_WITH_EIGEN)
+    inline QImage CreateMatrixVisualization(const Eigen::MatrixXd& matrix)
+    {
+        const int w = matrix.cols();
+        const int h = matrix.rows();
+        const double max_coeff = matrix.maxCoeff();
+        const double min_coeff = matrix.minCoeff();
+        const Eigen::MatrixXd normalized = (1.0 / (max_coeff - min_coeff)) * (matrix - Eigen::MatrixXd::Constant(h, w, min_coeff));
+
+        QImage image(w, h, QImage::Format_ARGB32);
+        for (int x = 0; x < w; ++ x)
+        {
+            for (int y = 0; y < h; ++ y)
+            {
+                const auto color = tinycolormap::GetColor(normalized(y, x));
+                image.setPixelColor(x, y, color.ConvertToQColor());
+            }
+        }
+
+        return image;
+    }
+
+    inline void ExportMatrixVisualization(const Eigen::MatrixXd& matrix, const std::string& path)
+    {
+        CreateMatrixVisualization(matrix).save(QString::fromStdString(path));
+    }
+#endif
 }
 
 #endif
