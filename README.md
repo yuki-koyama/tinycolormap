@@ -51,30 +51,15 @@ tinycolormap is a header-only library, so you do not need to compile it. You can
 
 If your project is managed by Cmake <https://cmake.org/>, `add_subdirectory` or `ExternalProject_Add` commands are useful as tinycolormap provides `CMakeLists.txt` for this purpose.
 
-## Tools (Optional)
+## Usage
 
-This repository includes the following optional tools:
-
-- PNG Exporter: This tool exports all the available colormaps as PNG images.
-
-### Additional Dependency
-
-- Qt5 <http://doc.qt.io/qt-5/>
-
-### Tools Build Instruction
-
-The optional tools are managed by CMake <https://cmake.org/>. They can be built by, for example,
-```bash
-mkdir build
-cd build
-cmake [PATH_TO_TINYCOLORMAP] -DTINYCOLORMAP_BUILD_TOOLS=ON
-make
+The core function of this library is
+```cpp
+inline Color GetColor(double x, ColormapType type);
 ```
+where `x` should be between `0.0` and `1.0` (otherwise, it will be cropped), and `type` is the target colormap type like `Viridis` (default) and `Heat`.
 
-Tips: if CMake could not find Qt5, it needs to specify the path to Qt5 explicitly by adding an option: `-DCMAKE_PREFIX_PATH=[PATH_TO_Qt5]`.
-
-## Sample Code
-
+Here is a working code:
 ```cpp
 #include <iostream>
 #include <tinycolormap.hpp>
@@ -94,18 +79,54 @@ int main()
 }
 ```
 
-## Options
+## Options for External Libraries Integration
 
-### Qt Support
+### Qt5 Support
 
 When `TINYCOLORMAP_WITH_QT5` is defined before including `tinycolormap.hpp`, for example,
 ```cpp
 #define TINYCOLORMAP_WITH_QT5
 #include <tinycolormap.hpp>
 ```
-this library offers an additional utility function:
+(or `TINYCOLORMAP_WITH_QT5` CMake option is `ON`), this library offers an additional utility function:
 ```cpp
 const QColor color = tinycolormap::GetColor(x).ConvertToQColor();
+```
+
+### Eigen Support
+
+When `TINYCOLORMAP_WITH_EIGEN` is defined before including `tinycolormap.hpp`, for example,
+```cpp
+#define TINYCOLORMAP_WITH_EIGEN
+#include <tinycolormap.hpp>
+```
+(or `TINYCOLORMAP_WITH_EIGEN` CMake option is `ON`), this library offers an additional utility function:
+```cpp
+const Eigen::Vector3d color = tinycolormap::GetColor(x).ConvertToEigen();
+```
+
+###  Qt5 and Eigen Support
+
+When both Qt5 and Eigen are available, this library offers additional utility functions:
+```cpp
+inline QImage CreateMatrixVisualization(const Eigen::MatrixXd& matrix);
+inline void ExportMatrixVisualization(const Eigen::MatrixXd& matrix, const std::string& path);
+```
+
+## Tools (Optional)
+
+This repository includes the following optional tools:
+
+- PNG Exporter: This tool exports all the available colormaps as PNG images. (Requirement: `TINYCOLORMAP_WITH_QT5 = ON`)
+
+### Tools Build Instruction
+
+The optional tools are managed by CMake <https://cmake.org/>. They can be built by, for example,
+```bash
+mkdir build
+cd build
+cmake [PATH_TO_TINYCOLORMAP] -DTINYCOLORMAP_BUILD_TOOLS=ON
+make
 ```
 
 ## Projects using tinycolormap
