@@ -1,6 +1,2 @@
-find_package(Qt5 COMPONENTS Gui REQUIRED)
-
-file(GLOB files ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
-
-add_executable(png-exporter ${files})
-target_link_libraries(png-exporter Qt5::Gui tinycolormap)
+add_executable(png-exporter ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+target_link_libraries(png-exporter tinycolormap)

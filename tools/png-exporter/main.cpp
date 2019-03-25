@@ -1,6 +1,5 @@
 #include <iostream>
 #include <QImage>
-#define TINYCOLORMAP_WITH_QT5
 #include <tinycolormap.hpp>
 
 int main(int argc, char* argv[])
