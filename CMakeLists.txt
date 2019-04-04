@@ -26,7 +26,7 @@ if(TINYCOLORMAP_WITH_QT5)
 		list(APPEND CMAKE_PREFIX_PATH "/usr/local/opt/qt")
 	endif()
 
-	find_package(Qt5 COMPONENTS Gui REQUIRED)
+	find_package(Qt5 5.6 COMPONENTS Gui REQUIRED)
 	target_link_libraries(tinycolormap INTERFACE Qt5::Gui)
 	target_compile_definitions(tinycolormap INTERFACE TINYCOLORMAP_WITH_QT5)
 endif()
