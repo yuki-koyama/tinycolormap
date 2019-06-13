@@ -23,12 +23,13 @@ Reference: <https://www.mathworks.com/help/matlab/ref/colormap.html>
 | Inferno  | ![](docs/samples/Inferno.png)  |
 | Plasma   | ![](docs/samples/Plasma.png)   |
 | Viridis  | ![](docs/samples/Viridis.png)  |
+| Cividis  | ![](docs/samples/Cividis.png)  |
 
-These colormaps are designed to be perceptually uniform (even in black-and-white printing) and friendly to colorblindness.
+These colormaps are designed to be perceptually uniform (even in black-and-white printing) and friendly to colorblindness. Cividis is specially designed such that it enables as identical interpretation to both those without a CVD and those with red-green colorblindness as possible.
 
-The original colormaps are released under CC0 by Nathaniel J. Smith, Stefan van der Walt, and (in the case of viridis) Eric Firing: <https://github.com/BIDS/colormap/blob/master/colormaps.py>. Their python code is adapted for the use in C++11.
+Magma, Inferno, Plasma, Viridis are released under CC0 by Nathaniel J. Smith, Stefan van der Walt, and (in the case of Viridis) Eric Firing: <https://github.com/BIDS/colormap/blob/master/colormaps.py>. Their python code is adapted for the use in C++11.
 
-Reference: <https://bids.github.io/colormap/>
+Cividis is released under CC0 by the authors of PLOS ONE paper (Jamie R. Nuñez, Christopher R. Anderton, Ryan S. Renslow): <https://doi.org/10.1371/journal.pone.0199239>. We incorporated the LUT into C++11.
 
 ### GitHub
 
