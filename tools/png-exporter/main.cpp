@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 
     constexpr int width  = 300;
     constexpr int height = 30;
-    
+
     const std::vector<std::pair<tinycolormap::ColormapType, std::string>> colormap_types
     {
         { tinycolormap::ColormapType::Heat,    "Heat"    },
@@ -32,20 +32,20 @@ int main(int argc, char* argv[])
     for (const auto& colormap_type : colormap_types)
     {
         QImage image(width, height, QImage::Format_ARGB32);
-        
+
         for (int x = 0; x < width; ++ x)
         {
-            const double              value = static_cast<double>(x) / static_cast<double>(width - 1);
-            const tinycolormap::Color color = tinycolormap::GetColor(value, colormap_type.first);
-            
+            const double value = static_cast<double>(x) / static_cast<double>(width - 1);
+            const QColor color = tinycolormap::GetColor(value, colormap_type.first).ConvertToQColor();
+
             for (int y = 0; y < height; ++ y)
             {
-                image.setPixelColor(x, y, color.ConvertToQColor());
+                image.setPixel(x, y, color.rgb());
             }
         }
-        
+
         image.save(QString::fromStdString(save_directory_path + "/" + colormap_type.second + ".png"));
     }
-    
+
     return 0;
 }
