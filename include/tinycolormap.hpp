@@ -1,18 +1,18 @@
 /*
  MIT License
- 
+
  Copyright (c) 2018 Yuki Koyama
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in all
  copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -46,25 +46,25 @@ namespace tinycolormap
     //////////////////////////////////////////////////////////////////////////////////
     // Interface
     //////////////////////////////////////////////////////////////////////////////////
-    
+
     enum class ColormapType
     {
         Heat, Jet, Hot, Gray, Magma, Inferno, Plasma, Viridis, Cividis, Github
     };
-    
+
     struct Color
     {
         constexpr Color(double r, double g, double b) : data({{ r, g, b }}) {}
-        
+
         std::array<double, 3> data;
-        
+
         double& r() { return data[0]; }
         double& g() { return data[1]; }
         double& b() { return data[2]; }
         const double& r() const { return data[0]; }
         const double& g() const { return data[1]; }
         const double& b() const { return data[2]; }
-        
+
         double& operator[](size_t n) { return data[n]; }
         const double& operator[](size_t n) const { return data[n]; }
         double& operator()(size_t n) { return data[n]; }
@@ -77,7 +77,7 @@ namespace tinycolormap
         Eigen::Vector3d ConvertToEigen() const { return Eigen::Vector3d(data[0], data[1], data[2]); }
 #endif
     };
-    
+
     inline Color GetColor(double x, ColormapType type = ColormapType::Viridis);
     inline Color GetHeatColor(double x);
     inline Color GetJetColor(double x);
@@ -94,21 +94,21 @@ namespace tinycolormap
     inline QImage CreateMatrixVisualization(const Eigen::MatrixXd& matrix);
     inline void ExportMatrixVisualization(const Eigen::MatrixXd& matrix, const std::string& path);
 #endif
-    
+
     //////////////////////////////////////////////////////////////////////////////////
     // Implementation
     //////////////////////////////////////////////////////////////////////////////////
-    
+
     inline Color operator+(const Color& c0, const Color& c1)
     {
         return { c0[0] + c1[0], c0[1] + c1[1], c0[2] + c1[2] };
     }
-    
+
     inline Color operator*(double s, const Color& c)
     {
         return { s * c[0], s * c[1], s * c[2] };
     }
-    
+
     inline Color GetColor(double x, ColormapType type)
     {
         switch (type)
@@ -137,11 +137,11 @@ namespace tinycolormap
                 break;
         }
     }
-    
+
     inline Color GetHeatColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
+
         constexpr Color data[] =
         {
             { 0.0, 0.0, 1.0 },
@@ -150,19 +150,19 @@ namespace tinycolormap
             { 1.0, 1.0, 0.0 },
             { 1.0, 0.0, 0.0 }
         };
-        
+
         const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
         const double t  = a - std::floor(a);
         const Color  c0 = data[static_cast<size_t>(std::floor(a))];
         const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
-        
+
         return (1.0 - t) * c0 + t * c1;
     }
-    
+
     inline Color GetJetColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
+
         constexpr Color data[] =
         {
             { 0.0, 0.0, 0.5 },
@@ -175,23 +175,23 @@ namespace tinycolormap
             { 1.0, 0.0, 0.0 },
             { 0.5, 0.0, 0.0 }
         };
-        
+
         const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
         const double t  = a - std::floor(a);
         const Color  c0 = data[static_cast<size_t>(std::floor(a))];
         const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
-        
+
         return (1.0 - t) * c0 + t * c1;
     }
-    
+
     inline Color GetHotColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
+
         constexpr Color r{ 1.0, 0.0, 0.0 };
         constexpr Color g{ 0.0, 1.0, 0.0 };
         constexpr Color b{ 0.0, 0.0, 1.0 };
-        
+
         if (x < 0.4)
         {
             const double t = x / 0.4;
@@ -208,18 +208,18 @@ namespace tinycolormap
             return r + g + t * b;
         }
     }
-    
+
     inline Color GetGrayColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
+
         return (1.0 - x) * Color{ 1.0, 1.0, 1.0 };
     }
-    
+
     inline Color GetMagmaColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
+
         constexpr Color data[] =
         {
             { 0.001462, 0.000466, 0.013866 },
@@ -479,14 +479,14 @@ namespace tinycolormap
             { 0.987387, 0.984288, 0.742002 },
             { 0.987053, 0.991438, 0.749504 }
         };
-        
+
         return data[static_cast<size_t>(std::round(x * 255.0))];
     }
-    
+
     inline Color GetInfernoColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
+
         constexpr Color data[] =
         {
             { 0.001462, 0.000466, 0.013866 },
@@ -746,14 +746,14 @@ namespace tinycolormap
             { 0.982257, 0.994109, 0.631017 },
             { 0.988362, 0.998364, 0.644924 }
         };
-        
+
         return data[static_cast<size_t>(std::round(x * 255.0))];
     }
-    
+
     inline Color GetPlasmaColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
+
         constexpr Color data[] =
         {
             { 0.050383, 0.029803, 0.527975 },
@@ -1013,14 +1013,14 @@ namespace tinycolormap
             { 0.941896, 0.968590, 0.140956 },
             { 0.940015, 0.975158, 0.131326 }
         };
-        
+
         return data[static_cast<size_t>(std::round(x * 255.0))];
     }
-    
+
     inline Color GetViridisColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
+
         constexpr Color data[] =
         {
             { 0.267004, 0.004874, 0.329415 },
@@ -1280,10 +1280,10 @@ namespace tinycolormap
             { 0.983868, 0.904867, 0.136897 },
             { 0.993248, 0.906157, 0.143936 }
         };
-        
+
         return data[static_cast<size_t>(std::round(x * 255.0))];
     }
-    
+
     inline Color GetCividisColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
@@ -1554,7 +1554,7 @@ namespace tinycolormap
     inline Color GetGithubColor(double x)
     {
         x = std::max(0.0, std::min(1.0, x));
-        
+
         constexpr Color data[] =
         {
             { 0.933333, 0.933333, 0.933333 },
@@ -1563,12 +1563,12 @@ namespace tinycolormap
             { 0.137254, 0.603921, 0.231372 },
             { 0.098039, 0.380392, 0.152941 }
         };
-        
+
         const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
         const double t  = a - std::floor(a);
         const Color  c0 = data[static_cast<size_t>(std::floor(a))];
         const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
-        
+
         return (1.0 - t) * c0 + t * c1;
     }
 
