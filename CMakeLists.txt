@@ -12,6 +12,12 @@ target_include_directories(tinycolormap INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/in
 option(TINYCOLORMAP_WITH_EIGEN "Enable Eigen integration" OFF)
 if(TINYCOLORMAP_WITH_EIGEN)
 	find_package(Eigen3 REQUIRED)
+	if((NOT TARGET Eigen3::Eigen) AND (DEFINED EIGEN3_INCLUDE_DIR))
+		add_library(AliasEigen3 INTERFACE)
+		target_include_directories(AliasEigen3 INTERFACE ${EIGEN3_INCLUDE_DIR})
+		add_library(Eigen3::Eigen ALIAS AliasEigen3)
+	endif()
+
 	target_link_libraries(tinycolormap INTERFACE Eigen3::Eigen)
 	target_compile_definitions(tinycolormap INTERFACE TINYCOLORMAP_WITH_EIGEN)
 endif()
