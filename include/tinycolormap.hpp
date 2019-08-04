@@ -1586,8 +1586,8 @@ namespace tinycolormap
         {
             for (int y = 0; y < h; ++ y)
             {
-                const auto color = tinycolormap::GetColor(normalized(y, x));
-                image.setPixelColor(x, y, color.ConvertToQColor());
+                const QColor color = tinycolormap::GetColor(normalized(y, x)).ConvertToQColor();
+                image.setPixel(x, y, color.rgb());
             }
         }
 

@@ -35,12 +35,12 @@ int main(int argc, char* argv[])
 
         for (int x = 0; x < width; ++ x)
         {
-            const double              value = static_cast<double>(x) / static_cast<double>(width - 1);
-            const tinycolormap::Color color = tinycolormap::GetColor(value, colormap_type.first);
+            const double value = static_cast<double>(x) / static_cast<double>(width - 1);
+            const QColor color = tinycolormap::GetColor(value, colormap_type.first).ConvertToQColor();
 
             for (int y = 0; y < height; ++ y)
             {
-                image.setPixelColor(x, y, color.ConvertToQColor());
+                image.setPixel(x, y, color.rgb());
             }
         }
 
