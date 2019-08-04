@@ -1,0 +1,26 @@
+language: cpp
+
+matrix:
+  include:
+    - compiler: gcc
+      os: linux
+    - compiler: clang
+      os: osx
+
+dist: xenial
+
+addons:
+  homebrew:
+    update: true
+    packages:
+    - eigen
+    - qt
+  apt:
+    packages:
+    - libeigen3-dev
+    - qt5-default
+
+script:
+  - cmake -DTINYCOLORMAP_BUILD_TOOLS=ON -DTINYCOLORMAP_WITH_EIGEN=ON -DTINYCOLORMAP_WITH_QT5=ON .
+  - make
+  - ctest
