@@ -139,6 +139,8 @@ namespace tinycolormap
             default:
                 break;
         }
+        
+        return GetViridisColor(x);
     }
 
     inline Color GetParulaColor(double x)
