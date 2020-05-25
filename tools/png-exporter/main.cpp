@@ -17,6 +17,7 @@ int main(int argc, char* argv[])
 
     const std::vector<std::pair<tinycolormap::ColormapType, std::string>> colormap_types
     {
+        { tinycolormap::ColormapType::Parula,  "Parula"  },
         { tinycolormap::ColormapType::Heat,    "Heat"    },
         { tinycolormap::ColormapType::Jet,     "Jet"     },
         { tinycolormap::ColormapType::Hot,     "Hot"     },

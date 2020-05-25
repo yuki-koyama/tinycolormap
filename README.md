@@ -11,6 +11,7 @@ A header-only, single-file library for colormaps written in C++11.
 
 | Name     | Sample                         |
 |:--------:|:------------------------------:|
+| Parula   | ![](docs/samples/Parula.png)   |
 | Heat     | ![](docs/samples/Heat.png)     |
 | Hot      | ![](docs/samples/Hot.png)      |
 | Jet      | ![](docs/samples/Jet.png)      |
