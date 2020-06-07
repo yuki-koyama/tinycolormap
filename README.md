@@ -122,7 +122,7 @@ inline void ExportMatrixVisualization(const Eigen::MatrixXd& matrix, const std::
 
 This repository includes the following optional tools:
 
-- PNG Exporter: This tool exports all the available colormaps as PNG images. (Requirement: `TINYCOLORMAP_WITH_QT5 = ON`)
+- PNG Exporter: This tool exports all the available colormaps as PNG images.
 
 ### Tools Build Instruction
 
@@ -141,6 +141,10 @@ make
 - Sequential Line Search (SIGGRAPH 2017) <https://github.com/yuki-koyama/sequential-line-search>
 - SelPh (CHI 2016) <https://github.com/yuki-koyama/selph>
 - VisOpt Slider (UIST 2014) <https://github.com/yuki-koyama/visoptslider>
+
+## License
+
+The MIT License (except for `tools/png-exporter/stb_image_write.h`, which is released under public domain).
 
 ## Contribute
 
