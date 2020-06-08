@@ -43,6 +43,14 @@ Cividis is released under CC0 by the authors of PLOS ONE paper (Jamie R. Nuñez,
 
 This colormap is designed to mimic the color scheme used in GitHub contributions visualization.
 
+### Other
+
+| Name     | Sample                         |
+|:--------:|:------------------------------:|
+| Turbo    | ![](docs/samples/Turbo.png)    |
+
+Turbo is released under Apache-2.0 by Anton Mikhailov (Google LLC.): <https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html>.
+
 ## Dependency
 
 tinycolormap does not have any dependencies except for C++11 standard library.
