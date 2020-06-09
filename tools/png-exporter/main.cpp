@@ -48,9 +48,9 @@ int main(int argc, char* argv[])
             {
                 const int index = num_components * (y * width + x);
 
-                image_data[index + 0] = static_cast<uint8_t>(color.r() * 255.0);
-                image_data[index + 1] = static_cast<uint8_t>(color.g() * 255.0);
-                image_data[index + 2] = static_cast<uint8_t>(color.b() * 255.0);
+                image_data[index + 0] = color.ri();
+                image_data[index + 1] = color.gi();
+                image_data[index + 2] = color.bi();
             }
         }
 
