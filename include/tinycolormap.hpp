@@ -79,6 +79,7 @@ namespace tinycolormap
     };
 
     inline Color GetColor(double x, ColormapType type = ColormapType::Viridis);
+    inline Color GetColorClass(double x, unsigned int num_classes, ColormapType type = ColormapType::Viridis);
     inline Color GetParulaColor(double x);
     inline Color GetHeatColor(double x);
     inline Color GetJetColor(double x);
@@ -141,6 +142,50 @@ namespace tinycolormap
         }
         
         return GetViridisColor(x);
+    }
+
+    inline Color GetColorClass(double x, unsigned int num_classes, ColormapType type)
+    {
+        double xx = 0.0;
+
+        for (unsigned int i = 0; i < num_classes; ++i)
+        {
+            if (x >= double(i) / double(num_classes) && x <= double(i + 1) / double(num_classes))
+            {
+                xx = double(2 * i + 1) / double(num_classes) * 0.5;
+                break;
+            }
+        }
+
+        switch (type)
+        {
+        case ColormapType::Parula:
+            return GetParulaColor(xx);
+        case ColormapType::Heat:
+            return GetHeatColor(xx);
+        case ColormapType::Jet:
+            return GetJetColor(xx);
+        case ColormapType::Hot:
+            return GetHotColor(xx);
+        case ColormapType::Gray:
+            return GetGrayColor(xx);
+        case ColormapType::Magma:
+            return GetMagmaColor(xx);
+        case ColormapType::Inferno:
+            return GetInfernoColor(xx);
+        case ColormapType::Plasma:
+            return GetPlasmaColor(xx);
+        case ColormapType::Viridis:
+            return GetViridisColor(xx);
+        case ColormapType::Cividis:
+            return GetCividisColor(xx);
+        case ColormapType::Github:
+            return GetGithubColor(xx);
+        default:
+            break;
+        }
+
+        return GetViridisColor(xx);
     }
 
     inline Color GetParulaColor(double x)
