@@ -157,35 +157,7 @@ namespace tinycolormap
             }
         }
 
-        switch (type)
-        {
-        case ColormapType::Parula:
-            return GetParulaColor(xx);
-        case ColormapType::Heat:
-            return GetHeatColor(xx);
-        case ColormapType::Jet:
-            return GetJetColor(xx);
-        case ColormapType::Hot:
-            return GetHotColor(xx);
-        case ColormapType::Gray:
-            return GetGrayColor(xx);
-        case ColormapType::Magma:
-            return GetMagmaColor(xx);
-        case ColormapType::Inferno:
-            return GetInfernoColor(xx);
-        case ColormapType::Plasma:
-            return GetPlasmaColor(xx);
-        case ColormapType::Viridis:
-            return GetViridisColor(xx);
-        case ColormapType::Cividis:
-            return GetCividisColor(xx);
-        case ColormapType::Github:
-            return GetGithubColor(xx);
-        default:
-            break;
-        }
-
-        return GetViridisColor(xx);
+        return GetColor(xx, type);
     }
 
     inline Color GetParulaColor(double x)
