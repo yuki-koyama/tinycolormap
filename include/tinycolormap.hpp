@@ -27,6 +27,7 @@
 
 #include <cmath>
 #include <array>
+#include <functional>
 
 #if defined(TINYCOLORMAP_WITH_EIGEN)
 #include <Eigen/Core>
@@ -79,7 +80,8 @@ namespace tinycolormap
     };
 
     inline Color GetColor(double x, ColormapType type = ColormapType::Viridis);
-    inline Color GetColorClass(double x, unsigned int num_classes, ColormapType type = ColormapType::Viridis);
+    inline Color GetColor(double x, unsigned int num_classes, ColormapType type = ColormapType::Viridis);
+    inline Color GetColor(double x, unsigned int num_classes, const std::function<Color(double)> & colormap_function);
     inline Color GetParulaColor(double x);
     inline Color GetHeatColor(double x);
     inline Color GetJetColor(double x);
@@ -109,6 +111,29 @@ namespace tinycolormap
     inline Color operator*(double s, const Color& c)
     {
         return { s * c[0], s * c[1], s * c[2] };
+    }
+
+    inline double GetDiscreteArgument(double x, unsigned int num_classes)
+    {
+        /* Clamp num_classes to range [1, 255]. */
+        num_classes = std::max(1u, std::min(num_classes, 255u));
+
+        const double interval_length = 255.0 / num_classes;
+
+        /* Calculate index of the interval to which the given x belongs to.
+         * Substracting eps prevents getting out of bounds index.
+         */
+        const double eps = 0.0005;
+        const unsigned int index = (x * 255.0 - eps) / interval_length;
+
+        /* Calculate upper and lower bounds of the given interval. */
+        const unsigned int upper_boundary = index * interval_length + interval_length;
+        const unsigned int lower_boundary = upper_boundary - interval_length;
+
+        /* Get middle "coordinate" of the given interval and move it back to [0.0, 1.0] interval. */
+        const double xx = static_cast<double>(upper_boundary + lower_boundary) * 0.5 / 255.0;
+
+        return xx;
     }
 
     inline Color GetColor(double x, ColormapType type)
@@ -144,27 +169,14 @@ namespace tinycolormap
         return GetViridisColor(x);
     }
 
-    inline Color GetColorClass(double x, unsigned int num_classes, ColormapType type)
+    inline Color GetColor(double x, unsigned int num_classes, ColormapType type)
     {
-        /* Clamp num_classes to range [1, 255]. */
-        num_classes = std::max(1u, std::min(num_classes, 255u));
+        return GetColor(GetDiscreteArgument(x, num_classes), type);
+    }
 
-        const double interval_length = 255.0 / num_classes;
- 
-        /* Calculate index of the interval to which the given x belongs to.
-         * Substracting eps prevents getting out of bounds index.
-         */
-        const double eps = 0.0005;
-        const unsigned int index = (x * 255.0 - eps) / interval_length;
-
-        /* Calculate upper and lower bounds of the given interval. */
-        const unsigned int upper_boundary = index * interval_length + interval_length;
-        const unsigned int lower_boundary = upper_boundary - interval_length;
-
-        /* Get middle "coordinate" of the given interval and move it back to [0.0, 1.0] interval. */
-        const double xx = (upper_boundary + lower_boundary) * 0.5 / 255.0;
-
-        return GetColor(xx, type);
+    inline Color GetColor(double x, unsigned int num_classes, const std::function<Color(double)> & colormap_function)
+    {
+        return colormap_function(GetDiscreteArgument(x, num_classes));
     }
 
     inline Color GetParulaColor(double x)
