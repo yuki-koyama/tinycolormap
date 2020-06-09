@@ -65,6 +65,13 @@ namespace tinycolormap
         const double& g() const { return data[1]; }
         const double& b() const { return data[2]; }
 
+        uint8_t ri() { return static_cast<uint8_t>(data[0] * 255.0); }
+        uint8_t gi() { return static_cast<uint8_t>(data[1] * 255.0); }
+        uint8_t bi() { return static_cast<uint8_t>(data[2] * 255.0); }
+        const uint8_t ri() const { return static_cast<uint8_t>(data[0] * 255.0); }
+        const uint8_t gi() const { return static_cast<uint8_t>(data[1] * 255.0); }
+        const uint8_t bi() const { return static_cast<uint8_t>(data[2] * 255.0); }
+
         double& operator[](size_t n) { return data[n]; }
         const double& operator[](size_t n) const { return data[n]; }
         double& operator()(size_t n) { return data[n]; }
