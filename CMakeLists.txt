@@ -37,6 +37,8 @@ if(TINYCOLORMAP_WITH_QT5)
 	target_compile_definitions(tinycolormap INTERFACE TINYCOLORMAP_WITH_QT5)
 endif()
 
+option(TINYCOLORMAP_WITH_GLM "Enable GLM integration" OFF)
+
 option(TINYCOLORMAP_BUILD_TOOLS "Build tools" OFF)
 if(TINYCOLORMAP_BUILD_TOOLS)
 	add_subdirectory(tools/png-exporter)
