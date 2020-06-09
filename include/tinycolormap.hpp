@@ -41,6 +41,10 @@
 #include <QString>
 #endif
 
+#if defined(TINYCOLORMAP_WITH_GLM)
+#include <glm/vec3.hpp>
+#endif
+
 namespace tinycolormap
 {
     //////////////////////////////////////////////////////////////////////////////////
@@ -75,6 +79,9 @@ namespace tinycolormap
 #endif
 #if defined(TINYCOLORMAP_WITH_EIGEN)
         Eigen::Vector3d ConvertToEigen() const { return Eigen::Vector3d(data[0], data[1], data[2]); }
+#endif
+#if defined(TINYCOLORMAP_WITH_GLM)
+        glm::vec3 ConvertToGLM() const { return glm::vec3(data[0], data[1], data[2]); }
 #endif
     };
 

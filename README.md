@@ -118,6 +118,18 @@ inline QImage CreateMatrixVisualization(const Eigen::MatrixXd& matrix);
 inline void ExportMatrixVisualization(const Eigen::MatrixXd& matrix, const std::string& path);
 ```
 
+### GLM Support
+
+When `TINYCOLORMAP_WITH_GLM` is defined before including `tinycolormap.hpp`, for example,
+```cpp
+#define TINYCOLORMAP_WITH_GLM
+#include <tinycolormap.hpp>
+```
+(or `TINYCOLORMAP_WITH_GLM` CMake option is `ON`), this library offers an additional utility function:
+```cpp
+const glm::vec3 color = tinycolormap::GetColor(x).ConvertToGLM();
+```
+
 ## Tools (Optional)
 
 This repository includes the following optional tools:
