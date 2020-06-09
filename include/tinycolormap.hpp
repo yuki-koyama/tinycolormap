@@ -146,16 +146,23 @@ namespace tinycolormap
 
     inline Color GetColorClass(double x, unsigned int num_classes, ColormapType type)
     {
-        double xx = 0.0;
+        /* Clamp num_classes to range [1, 255]. */
+        num_classes = std::max(1u, std::min(num_classes, 255u));
 
-        for (unsigned int i = 0; i < num_classes; ++i)
-        {
-            if (x >= double(i) / double(num_classes) && x <= double(i + 1) / double(num_classes))
-            {
-                xx = double(2 * i + 1) / double(num_classes) * 0.5;
-                break;
-            }
-        }
+        const double interval_length = 255.0 / num_classes;
+ 
+        /* Calculate index of the interval to which the given x belongs to.
+         * Substracting eps prevents getting out of bounds index.
+         */
+        const double eps = 0.0005;
+        const unsigned int index = (x * 255.0 - eps) / interval_length;
+
+        /* Calculate upper and lower bounds of the given interval. */
+        const unsigned int upper_boundary = index * interval_length + interval_length;
+        const unsigned int lower_boundary = upper_boundary - interval_length;
+
+        /* Get middle "coordinate" of the given interval and move it back to [0.0, 1.0] interval. */
+        const double xx = (upper_boundary + lower_boundary) * 0.5 / 255.0;
 
         return GetColor(xx, type);
     }
