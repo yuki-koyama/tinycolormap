@@ -23,7 +23,8 @@
 
  -------------------------------------------------------------------------------
 
- The lookup table for Turbo is derived by Shot511 from
+ The lookup table for Turbo is derived by Shot511 in his PR,
+ https://github.com/yuki-koyama/tinycolormap/pull/27 , from
  https://gist.github.com/mikhailov-work/6a308c20e494d9e0ccc29036b28faa7a , which
  is released by Anton Mikhailov, copyrighted by Google LLC, and licensed under
  the Apache 2.0 license. To the best of our knowledge, the Apache 2.0 license is
