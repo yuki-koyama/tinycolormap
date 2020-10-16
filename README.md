@@ -49,7 +49,7 @@ This colormap is designed to mimic the color scheme used in GitHub contributions
 |:--------:|:------------------------------:|
 | Turbo    | ![](docs/samples/Turbo.png)    |
 
-Turbo is released under Apache-2.0 by Anton Mikhailov (Google LLC.): <https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html>.
+Turbo is developed as an alternative to the Jet colormap by Anton Mikhailov (Google LLC). See [the blog post](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html) for the details. [The original lookup table](https://gist.github.com/mikhailov-work/6a308c20e494d9e0ccc29036b28faa7a) is released under the Apache 2.0 license. We merged it and re-licensed the part under the MIT license for consistency.
 
 ## Dependency
 
