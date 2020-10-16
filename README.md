@@ -148,6 +148,7 @@ make
 
 ## Projects using tinycolormap
 
+- SLiM <https://github.com/MesserLab/SLiM>
 - Neper: Polycrystal Generation and Meshing <http://neper.info/>
 - Unblending (Pacific Graphics 2018) <https://github.com/yuki-koyama/unblending>
 - OptiMo (CHI 2018) <https://github.com/yuki-koyama/optimo>
