@@ -153,7 +153,7 @@ namespace tinycolormap
             default:
                 break;
         }
-        
+
         return GetViridisColor(x);
     }
 
