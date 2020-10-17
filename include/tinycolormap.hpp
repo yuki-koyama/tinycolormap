@@ -145,6 +145,24 @@ namespace tinycolormap
         return { s * c[0], s * c[1], s * c[2] };
     }
 
+    namespace internal
+    {
+        // A helper function to calculate linear interpolation
+        template <std::size_t N>
+        Color CalcLerp(double x, const Color (&data)[N])
+        {
+            x = std::max(0.0, std::min(1.0, x));
+
+            const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
+            const double i  = std::floor(a);
+            const double t  = a - i;
+            const Color& c0 = data[static_cast<std::size_t>(i)];
+            const Color& c1 = data[static_cast<std::size_t>(std::ceil(a))];
+
+            return (1.0 - t) * c0 + t * c1;
+        }
+    }
+
     inline Color GetColor(double x, ColormapType type)
     {
         switch (type)
@@ -444,13 +462,11 @@ namespace tinycolormap
             { 0.9763, 0.9831, 0.0538 }
         };
 
-        return data[static_cast<size_t>(std::round(x * 255.0))];
+        return internal::CalcLerp(x, data);
     }
 
     inline Color GetHeatColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.0, 0.0, 1.0 },
@@ -460,18 +476,11 @@ namespace tinycolormap
             { 1.0, 0.0, 0.0 }
         };
 
-        const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
-        const double t  = a - std::floor(a);
-        const Color  c0 = data[static_cast<size_t>(std::floor(a))];
-        const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
-
-        return (1.0 - t) * c0 + t * c1;
+        return internal::CalcLerp(x, data);
     }
 
     inline Color GetJetColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.0, 0.0, 0.5 },
@@ -485,18 +494,11 @@ namespace tinycolormap
             { 0.5, 0.0, 0.0 }
         };
 
-        const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
-        const double t  = a - std::floor(a);
-        const Color  c0 = data[static_cast<size_t>(std::floor(a))];
-        const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
-
-        return (1.0 - t) * c0 + t * c1;
+        return internal::CalcLerp(x, data);
     }
 
     inline Color GetTurboColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.18995, 0.07176, 0.23217 },
@@ -757,7 +759,7 @@ namespace tinycolormap
             { 0.47960, 0.01583, 0.01055 }
         };
 
-        return data[static_cast<size_t>(std::round(x * 255.0))];
+        return internal::CalcLerp(x, data);
     }
 
     inline Color GetHotColor(double x)
@@ -794,8 +796,6 @@ namespace tinycolormap
 
     inline Color GetMagmaColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.001462, 0.000466, 0.013866 },
@@ -1056,13 +1056,11 @@ namespace tinycolormap
             { 0.987053, 0.991438, 0.749504 }
         };
 
-        return data[static_cast<size_t>(std::round(x * 255.0))];
+        return internal::CalcLerp(x, data);
     }
 
     inline Color GetInfernoColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.001462, 0.000466, 0.013866 },
@@ -1323,13 +1321,11 @@ namespace tinycolormap
             { 0.988362, 0.998364, 0.644924 }
         };
 
-        return data[static_cast<size_t>(std::round(x * 255.0))];
+        return internal::CalcLerp(x, data);
     }
 
     inline Color GetPlasmaColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.050383, 0.029803, 0.527975 },
@@ -1590,13 +1586,11 @@ namespace tinycolormap
             { 0.940015, 0.975158, 0.131326 }
         };
 
-        return data[static_cast<size_t>(std::round(x * 255.0))];
+        return internal::CalcLerp(x, data);
     }
 
     inline Color GetViridisColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.267004, 0.004874, 0.329415 },
@@ -1857,13 +1851,11 @@ namespace tinycolormap
             { 0.993248, 0.906157, 0.143936 }
         };
 
-        return data[static_cast<size_t>(std::round(x * 255.0))];
+        return internal::CalcLerp(x, data);
     }
 
     inline Color GetCividisColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.0000, 0.1262, 0.3015 },
@@ -2124,13 +2116,11 @@ namespace tinycolormap
             { 1.0000, 0.9169, 0.2731 }
         };
 
-        return data[static_cast<size_t>(std::round(x * 255.0))];
+        return internal::CalcLerp(x, data);
     }
 
     inline Color GetGithubColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.933333, 0.933333, 0.933333 },
@@ -2140,12 +2130,7 @@ namespace tinycolormap
             { 0.098039, 0.380392, 0.152941 }
         };
 
-        const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
-        const double t  = a - std::floor(a);
-        const Color  c0 = data[static_cast<size_t>(std::floor(a))];
-        const Color  c1 = data[static_cast<size_t>(std::ceil (a))];
-
-        return (1.0 - t) * c0 + t * c1;
+        return internal::CalcLerp(x, data);
     }
 
 #if defined(TINYCOLORMAP_WITH_QT5) and defined(TINYCOLORMAP_WITH_EIGEN)
