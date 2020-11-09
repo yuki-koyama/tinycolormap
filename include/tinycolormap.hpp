@@ -48,10 +48,9 @@
 #ifndef TINYCOLORMAP_HPP_
 #define TINYCOLORMAP_HPP_
 
-typedef u_int8_t uint8_t;
-
 #include <cmath>
 #include <array>
+#include <cstdint>
 
 #if defined(TINYCOLORMAP_WITH_EIGEN)
 #include <Eigen/Core>
