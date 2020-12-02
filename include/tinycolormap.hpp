@@ -49,7 +49,6 @@
 #define TINYCOLORMAP_HPP_
 
 #include <cmath>
-#include <array>
 #include <cstdint>
 
 #if defined(TINYCOLORMAP_WITH_EIGEN)
@@ -82,25 +81,25 @@ namespace tinycolormap
 
     struct Color
     {
-        constexpr Color(double r, double g, double b) : data({{ r, g, b }}) {}
+        constexpr Color(double r, double g, double b) noexcept : data{ r, g, b } {}
 
-        std::array<double, 3> data;
+        double data[3];
 
-        double& r() { return data[0]; }
-        double& g() { return data[1]; }
-        double& b() { return data[2]; }
-        const double& r() const { return data[0]; }
-        const double& g() const { return data[1]; }
-        const double& b() const { return data[2]; }
+        double& r() noexcept { return data[0]; }
+        double& g() noexcept { return data[1]; }
+        double& b() noexcept { return data[2]; }
+        constexpr double r() const noexcept { return data[0]; }
+        constexpr double g() const noexcept { return data[1]; }
+        constexpr double b() const noexcept { return data[2]; }
 
-        uint8_t ri() const { return static_cast<uint8_t>(data[0] * 255.0); }
-        uint8_t gi() const { return static_cast<uint8_t>(data[1] * 255.0); }
-        uint8_t bi() const { return static_cast<uint8_t>(data[2] * 255.0); }
+        constexpr uint8_t ri() const noexcept { return static_cast<uint8_t>(data[0] * 255.0); }
+        constexpr uint8_t gi() const noexcept { return static_cast<uint8_t>(data[1] * 255.0); }
+        constexpr uint8_t bi() const noexcept { return static_cast<uint8_t>(data[2] * 255.0); }
 
-        double& operator[](std::size_t n) { return data[n]; }
-        const double& operator[](std::size_t n) const { return data[n]; }
-        double& operator()(std::size_t n) { return data[n]; }
-        const double& operator()(std::size_t n) const { return data[n]; }
+        double& operator[](std::size_t n) noexcept { return data[n]; }
+        constexpr double operator[](std::size_t n) const noexcept { return data[n]; }
+        double& operator()(std::size_t n) noexcept { return data[n]; }
+        constexpr double operator()(std::size_t n) const noexcept { return data[n]; }
 
 #if defined(TINYCOLORMAP_WITH_QT5)
         QColor ConvertToQColor() const { return QColor(data[0] * 255.0, data[1] * 255.0, data[2] * 255.0); }
