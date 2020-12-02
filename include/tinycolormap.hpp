@@ -147,13 +147,16 @@ namespace tinycolormap
 
     namespace internal
     {
+        inline constexpr double Clamp01(double x) noexcept
+        {
+            return (x < 0.0) ? 0.0 : (x > 1.0) ? 1.0 : x;
+        }
+        
         // A helper function to calculate linear interpolation
         template <std::size_t N>
         Color CalcLerp(double x, const Color (&data)[N])
         {
-            x = std::max(0.0, std::min(1.0, x));
-
-            const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
+            const double a  = Clamp01(x) * (N - 1);
             const double i  = std::floor(a);
             const double t  = a - i;
             const Color& c0 = data[static_cast<std::size_t>(i)];
@@ -200,8 +203,6 @@ namespace tinycolormap
 
     inline Color GetParulaColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.2081, 0.1663, 0.5292 },
@@ -764,7 +765,7 @@ namespace tinycolormap
 
     inline Color GetHotColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
+        x = internal::Clamp01(x);
 
         constexpr Color r{ 1.0, 0.0, 0.0 };
         constexpr Color g{ 0.0, 1.0, 0.0 };
@@ -789,9 +790,7 @@ namespace tinycolormap
 
     inline Color GetGrayColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
-        return (1.0 - x) * Color{ 1.0, 1.0, 1.0 };
+        return (1.0 - internal::Clamp01(x)) * Color{ 1.0, 1.0, 1.0 };
     }
 
     inline Color GetMagmaColor(double x)
