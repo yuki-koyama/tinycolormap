@@ -81,6 +81,7 @@ namespace tinycolormap
 
     struct Color
     {
+        explicit constexpr Color(double gray) noexcept : data{ gray, gray, gray } {}
         constexpr Color(double r, double g, double b) noexcept : data{ r, g, b } {}
 
         double data[3];
@@ -128,7 +129,7 @@ namespace tinycolormap
     inline Color GetJetColor(double x);
     inline Color GetTurboColor(double x);
     inline Color GetHotColor(double x);
-    inline Color GetGrayColor(double x);
+    inline constexpr Color GetGrayColor(double x) noexcept;
     inline Color GetMagmaColor(double x);
     inline Color GetInfernoColor(double x);
     inline Color GetPlasmaColor(double x);
@@ -788,9 +789,9 @@ namespace tinycolormap
         }
     }
 
-    inline Color GetGrayColor(double x)
+    inline constexpr Color GetGrayColor(double x) noexcept
     {
-        return (1.0 - internal::Clamp01(x)) * Color{ 1.0, 1.0, 1.0 };
+        return Color{ 1.0 - internal::Clamp01(x) };
     }
 
     inline Color GetMagmaColor(double x)
