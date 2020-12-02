@@ -49,7 +49,6 @@
 #define TINYCOLORMAP_HPP_
 
 #include <cmath>
-#include <array>
 #include <cstdint>
 
 #if defined(TINYCOLORMAP_WITH_EIGEN)
@@ -82,26 +81,37 @@ namespace tinycolormap
 
     struct Color
     {
-        constexpr Color(double r, double g, double b) : data({{ r, g, b }}) {}
+        explicit constexpr Color(double gray) noexcept : data{ gray, gray, gray } {}
+        constexpr Color(double r, double g, double b) noexcept : data{ r, g, b } {}
 
-        std::array<double, 3> data;
+        double data[3];
 
-        double& r() { return data[0]; }
-        double& g() { return data[1]; }
-        double& b() { return data[2]; }
-        const double& r() const { return data[0]; }
-        const double& g() const { return data[1]; }
-        const double& b() const { return data[2]; }
+        double& r() noexcept { return data[0]; }
+        double& g() noexcept { return data[1]; }
+        double& b() noexcept { return data[2]; }
+        constexpr double r() const noexcept { return data[0]; }
+        constexpr double g() const noexcept { return data[1]; }
+        constexpr double b() const noexcept { return data[2]; }
 
-        uint8_t ri() const { return static_cast<uint8_t>(data[0] * 255.0); }
-        uint8_t gi() const { return static_cast<uint8_t>(data[1] * 255.0); }
-        uint8_t bi() const { return static_cast<uint8_t>(data[2] * 255.0); }
+        constexpr uint8_t ri() const noexcept { return static_cast<uint8_t>(data[0] * 255.0); }
+        constexpr uint8_t gi() const noexcept { return static_cast<uint8_t>(data[1] * 255.0); }
+        constexpr uint8_t bi() const noexcept { return static_cast<uint8_t>(data[2] * 255.0); }
 
-        double& operator[](std::size_t n) { return data[n]; }
-        const double& operator[](std::size_t n) const { return data[n]; }
-        double& operator()(std::size_t n) { return data[n]; }
-        const double& operator()(std::size_t n) const { return data[n]; }
+        double& operator[](std::size_t n) noexcept { return data[n]; }
+        constexpr double operator[](std::size_t n) const noexcept { return data[n]; }
+        double& operator()(std::size_t n) noexcept { return data[n]; }
+        constexpr double operator()(std::size_t n) const noexcept { return data[n]; }
 
+        friend constexpr Color operator+(const Color& c0, const Color& c1) noexcept
+        {
+            return { c0.r() + c1.r(), c0.g() + c1.g(), c0.b() + c1.b() };
+        }
+
+        friend constexpr Color operator*(double s, const Color& c) noexcept
+        {
+            return { s * c.r(), s * c.g(), s * c.b() };
+        }
+     
 #if defined(TINYCOLORMAP_WITH_QT5)
         QColor ConvertToQColor() const { return QColor(data[0] * 255.0, data[1] * 255.0, data[2] * 255.0); }
 #endif
@@ -119,7 +129,7 @@ namespace tinycolormap
     inline Color GetJetColor(double x);
     inline Color GetTurboColor(double x);
     inline Color GetHotColor(double x);
-    inline Color GetGrayColor(double x);
+    inline constexpr Color GetGrayColor(double x) noexcept;
     inline Color GetMagmaColor(double x);
     inline Color GetInfernoColor(double x);
     inline Color GetPlasmaColor(double x);
@@ -136,25 +146,18 @@ namespace tinycolormap
     // Implementation
     //////////////////////////////////////////////////////////////////////////////////
 
-    inline Color operator+(const Color& c0, const Color& c1)
-    {
-        return { c0[0] + c1[0], c0[1] + c1[1], c0[2] + c1[2] };
-    }
-
-    inline Color operator*(double s, const Color& c)
-    {
-        return { s * c[0], s * c[1], s * c[2] };
-    }
-
     namespace internal
     {
+        inline constexpr double Clamp01(double x) noexcept
+        {
+            return (x < 0.0) ? 0.0 : (x > 1.0) ? 1.0 : x;
+        }
+        
         // A helper function to calculate linear interpolation
         template <std::size_t N>
         Color CalcLerp(double x, const Color (&data)[N])
         {
-            x = std::max(0.0, std::min(1.0, x));
-
-            const double a  = x * ((sizeof(data) / sizeof(Color)) - 1);
+            const double a  = Clamp01(x) * (N - 1);
             const double i  = std::floor(a);
             const double t  = a - i;
             const Color& c0 = data[static_cast<std::size_t>(i)];
@@ -201,8 +204,6 @@ namespace tinycolormap
 
     inline Color GetParulaColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
-
         constexpr Color data[] =
         {
             { 0.2081, 0.1663, 0.5292 },
@@ -765,7 +766,7 @@ namespace tinycolormap
 
     inline Color GetHotColor(double x)
     {
-        x = std::max(0.0, std::min(1.0, x));
+        x = internal::Clamp01(x);
 
         constexpr Color r{ 1.0, 0.0, 0.0 };
         constexpr Color g{ 0.0, 1.0, 0.0 };
@@ -788,11 +789,9 @@ namespace tinycolormap
         }
     }
 
-    inline Color GetGrayColor(double x)
+    inline constexpr Color GetGrayColor(double x) noexcept
     {
-        x = std::max(0.0, std::min(1.0, x));
-
-        return (1.0 - x) * Color{ 1.0, 1.0, 1.0 };
+        return Color{ 1.0 - internal::Clamp01(x) };
     }
 
     inline Color GetMagmaColor(double x)
