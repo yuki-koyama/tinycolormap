@@ -101,6 +101,16 @@ namespace tinycolormap
         double& operator()(std::size_t n) noexcept { return data[n]; }
         constexpr double operator()(std::size_t n) const noexcept { return data[n]; }
 
+        friend constexpr Color operator+(const Color& c0, const Color& c1) noexcept
+        {
+            return { c0.r() + c1.r(), c0.g() + c1.g(), c0.b() + c1.b() };
+        }
+
+        friend constexpr Color operator*(double s, const Color& c) noexcept
+        {
+            return { s * c.r(), s * c.g(), s * c.b() };
+        }
+     
 #if defined(TINYCOLORMAP_WITH_QT5)
         QColor ConvertToQColor() const { return QColor(data[0] * 255.0, data[1] * 255.0, data[2] * 255.0); }
 #endif
@@ -134,16 +144,6 @@ namespace tinycolormap
     //////////////////////////////////////////////////////////////////////////////////
     // Implementation
     //////////////////////////////////////////////////////////////////////////////////
-
-    inline Color operator+(const Color& c0, const Color& c1)
-    {
-        return { c0[0] + c1[0], c0[1] + c1[1], c0[2] + c1[2] };
-    }
-
-    inline Color operator*(double s, const Color& c)
-    {
-        return { s * c[0], s * c[1], s * c[2] };
-    }
 
     namespace internal
     {
