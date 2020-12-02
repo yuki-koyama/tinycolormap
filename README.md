@@ -1,6 +1,7 @@
 # tinycolormap
 
-[![Build Status](https://travis-ci.com/yuki-koyama/tinycolormap.svg?branch=master)](https://travis-ci.com/yuki-koyama/tinycolormap)
+![macOS](https://github.com/yuki-koyama/tinycolormap/workflows/macOS/badge.svg)
+![Ubuntu](https://github.com/yuki-koyama/tinycolormap/workflows/Ubuntu/badge.svg)
 ![GitHub](https://img.shields.io/github/license/yuki-koyama/tinycolormap)
 
 A header-only, single-file library for colormaps written in C++11.
