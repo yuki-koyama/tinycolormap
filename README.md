@@ -1,6 +1,7 @@
 # tinycolormap
 
-[![Build Status](https://travis-ci.com/yuki-koyama/tinycolormap.svg?branch=master)](https://travis-ci.com/yuki-koyama/tinycolormap)
+![macOS](https://github.com/yuki-koyama/tinycolormap/workflows/macOS/badge.svg)
+![Ubuntu](https://github.com/yuki-koyama/tinycolormap/workflows/Ubuntu/badge.svg)
 ![GitHub](https://img.shields.io/github/license/yuki-koyama/tinycolormap)
 
 A header-only, single-file library for colormaps written in C++11.
@@ -42,6 +43,14 @@ Cividis is released under CC0 by the authors of PLOS ONE paper (Jamie R. Nuñez,
 | Github   | ![](docs/samples/Github.png)   |
 
 This colormap is designed to mimic the color scheme used in GitHub contributions visualization.
+
+### Other
+
+| Name     | Sample                         |
+|:--------:|:------------------------------:|
+| Turbo    | ![](docs/samples/Turbo.png)    |
+
+Turbo is developed as an alternative to the Jet colormap by Anton Mikhailov (Google LLC). See [the blog post](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html) for the details. [The original lookup table](https://gist.github.com/mikhailov-work/6a308c20e494d9e0ccc29036b28faa7a) is released under the Apache 2.0 license. We merged it and re-licensed the part under the MIT license for consistency.
 
 ## Dependency
 
@@ -118,6 +127,18 @@ inline QImage CreateMatrixVisualization(const Eigen::MatrixXd& matrix);
 inline void ExportMatrixVisualization(const Eigen::MatrixXd& matrix, const std::string& path);
 ```
 
+### GLM Support
+
+When `TINYCOLORMAP_WITH_GLM` is defined before including `tinycolormap.hpp`, for example,
+```cpp
+#define TINYCOLORMAP_WITH_GLM
+#include <tinycolormap.hpp>
+```
+(or `TINYCOLORMAP_WITH_GLM` CMake option is `ON`), this library offers an additional utility function:
+```cpp
+const glm::vec3 color = tinycolormap::GetColor(x).ConvertToGLM();
+```
+
 ## Tools (Optional)
 
 This repository includes the following optional tools:
@@ -136,6 +157,8 @@ make
 
 ## Projects using tinycolormap
 
+- SLiM <https://github.com/MesserLab/SLiM>
+- Neper: Polycrystal Generation and Meshing <http://neper.info/>
 - Unblending (Pacific Graphics 2018) <https://github.com/yuki-koyama/unblending>
 - OptiMo (CHI 2018) <https://github.com/yuki-koyama/optimo>
 - Sequential Line Search (SIGGRAPH 2017) <https://github.com/yuki-koyama/sequential-line-search>
