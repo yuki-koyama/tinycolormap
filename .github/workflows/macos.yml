@@ -1,0 +1,17 @@
+name: macOS
+
+on: [push]
+
+jobs:
+  build-test:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: build-example
+      run: |
+        cmake -DTINYCOLORMAP_BUILD_TOOLS=ON .
+        make
+    - name: ctest
+      run: ctest
