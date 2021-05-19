@@ -27,7 +27,6 @@
 
 #include <cmath>
 #include <array>
-#include <functional>
 
 #if defined(TINYCOLORMAP_WITH_EIGEN)
 #include <Eigen/Core>
@@ -80,8 +79,7 @@ namespace tinycolormap
     };
 
     inline Color GetColor(double x, ColormapType type = ColormapType::Viridis);
-    inline Color GetColor(double x, unsigned int num_classes, ColormapType type = ColormapType::Viridis);
-    inline Color GetColor(double x, unsigned int num_classes, const std::function<Color(double)> & colormap_function);
+    inline Color GetQuantizedColor(double x, unsigned int num_levels, ColormapType type = ColormapType::Viridis);
     inline Color GetParulaColor(double x);
     inline Color GetHeatColor(double x);
     inline Color GetJetColor(double x);
@@ -100,7 +98,37 @@ namespace tinycolormap
 #endif
 
     //////////////////////////////////////////////////////////////////////////////////
-    // Implementation
+    // Private Implementation - public usage is not intended
+    //////////////////////////////////////////////////////////////////////////////////
+
+    namespace internal
+    {
+        inline double QuantizeArgument(double x, unsigned int num_levels)
+        {
+            /* Clamp num_classes to range [1, 255]. */
+            num_levels = std::max(1u, std::min(num_levels, 255u));
+
+            const double interval_length = 255.0 / num_levels;
+
+            /* Calculate index of the interval to which the given x belongs to.
+             * Substracting eps prevents getting out of bounds index.
+             */
+            const double eps = 0.0005;
+            const unsigned int index = (x * 255.0 - eps) / interval_length;
+
+            /* Calculate upper and lower bounds of the given interval. */
+            const unsigned int upper_boundary = index * interval_length + interval_length;
+            const unsigned int lower_boundary = upper_boundary - interval_length;
+
+            /* Get middle "coordinate" of the given interval and move it back to [0.0, 1.0] interval. */
+            const double xx = static_cast<double>(upper_boundary + lower_boundary) * 0.5 / 255.0;
+
+            return xx;
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////
+    // Public Implementation
     //////////////////////////////////////////////////////////////////////////////////
 
     inline Color operator+(const Color& c0, const Color& c1)
@@ -111,29 +139,6 @@ namespace tinycolormap
     inline Color operator*(double s, const Color& c)
     {
         return { s * c[0], s * c[1], s * c[2] };
-    }
-
-    inline double GetDiscreteArgument(double x, unsigned int num_classes)
-    {
-        /* Clamp num_classes to range [1, 255]. */
-        num_classes = std::max(1u, std::min(num_classes, 255u));
-
-        const double interval_length = 255.0 / num_classes;
-
-        /* Calculate index of the interval to which the given x belongs to.
-         * Substracting eps prevents getting out of bounds index.
-         */
-        const double eps = 0.0005;
-        const unsigned int index = (x * 255.0 - eps) / interval_length;
-
-        /* Calculate upper and lower bounds of the given interval. */
-        const unsigned int upper_boundary = index * interval_length + interval_length;
-        const unsigned int lower_boundary = upper_boundary - interval_length;
-
-        /* Get middle "coordinate" of the given interval and move it back to [0.0, 1.0] interval. */
-        const double xx = static_cast<double>(upper_boundary + lower_boundary) * 0.5 / 255.0;
-
-        return xx;
     }
 
     inline Color GetColor(double x, ColormapType type)
@@ -169,14 +174,9 @@ namespace tinycolormap
         return GetViridisColor(x);
     }
 
-    inline Color GetColor(double x, unsigned int num_classes, ColormapType type)
+    inline Color GetQuantizedColor(double x, unsigned int num_levels, ColormapType type)
     {
-        return GetColor(GetDiscreteArgument(x, num_classes), type);
-    }
-
-    inline Color GetColor(double x, unsigned int num_classes, const std::function<Color(double)> & colormap_function)
-    {
-        return colormap_function(GetDiscreteArgument(x, num_classes));
+        return GetColor(internal::QuantizeArgument(x, num_levels), type);
     }
 
     inline Color GetParulaColor(double x)
