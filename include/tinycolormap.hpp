@@ -178,11 +178,11 @@ namespace tinycolormap
              * Substracting eps prevents getting out of bounds index.
              */
             const double eps = 0.0005;
-            const unsigned int index = (x * 255.0 - eps) / interval_length;
+            const unsigned int index = static_cast<unsigned int>((x * 255.0 - eps) / interval_length);
 
             /* Calculate upper and lower bounds of the given interval. */
-            const unsigned int upper_boundary = index * interval_length + interval_length;
-            const unsigned int lower_boundary = upper_boundary - interval_length;
+            const unsigned int upper_boundary = static_cast<unsigned int>(index * interval_length + interval_length);
+            const unsigned int lower_boundary = static_cast<unsigned int>(upper_boundary - interval_length);
 
             /* Get middle "coordinate" of the given interval and move it back to [0.0, 1.0] interval. */
             const double xx = static_cast<double>(upper_boundary + lower_boundary) * 0.5 / 255.0;
@@ -190,21 +190,10 @@ namespace tinycolormap
             return xx;
         }
     }
-}
 
     //////////////////////////////////////////////////////////////////////////////////
     // Public Implementation
     //////////////////////////////////////////////////////////////////////////////////
-
-    inline Color operator+(const Color& c0, const Color& c1)
-    {
-        return { c0[0] + c1[0], c0[1] + c1[1], c0[2] + c1[2] };
-    }
-
-    inline Color operator*(double s, const Color& c)
-    {
-        return { s * c[0], s * c[1], s * c[2] };
-    }
 
     inline Color GetColor(double x, ColormapType type)
     {
