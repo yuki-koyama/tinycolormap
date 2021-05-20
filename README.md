@@ -93,6 +93,37 @@ int main()
 }
 ```
 
+### Quantized colors
+
+tinycolormap is also capable of producing quantized colormaps (i.e. the ones that have visible boundaries between colors) based on the user specified number of levels. Below is the example of the quantized Parula colormap using 10 quantization levels:
+
+| Name     | Sample                                  |
+|:--------:|:---------------------------------------:|
+| Parula   | ![](docs/samples/Parula_10levels.png)   |
+
+Note that the supported range for number of levels is `[1, 255]`.
+
+Here is an example code that uses colormap quantization:
+
+```
+int main()
+{
+  // Define a target value. This value should be in [0, 1]; otherwise, it will be cropped to 0 or 1.
+  const double value = 0.5;
+
+  // Define number of levels for the colormap quantization. This value should be in [1, 255]; otherwise, it will be cropped to 1 or 255.
+  const unsigned int num_levels = 10;
+
+  // Get the mapped color. Here, Parula is specified as the colormap.
+  const tinycolormap::Color color = tinycolormap::GetQuantizedColor(value, num_levels, tinycolormap::ColormapType::Parula);
+
+  // Print the RGB values. Each value is in [0, 1].
+  std::cout << "r = " << color.r() << ", g = " << color.g() << ", b = " << color.b() << std::endl;
+
+  return 0;
+}
+```
+
 ## Options for External Libraries Integration
 
 ### Qt5 Support
