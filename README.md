@@ -104,8 +104,7 @@ tinycolormap is also capable of producing quantized colormaps (i.e. the ones tha
 Note that the supported range for number of levels is `[1, 255]`.
 
 Here is an example code that uses colormap quantization:
-
-```
+```cpp
 int main()
 {
   // Define a target value. This value should be in [0, 1]; otherwise, it will be cropped to 0 or 1.
