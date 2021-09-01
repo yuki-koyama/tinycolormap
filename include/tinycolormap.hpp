@@ -50,6 +50,7 @@
 
 #include <cmath>
 #include <cstdint>
+#include <algorithm>
 
 #if defined(TINYCOLORMAP_WITH_EIGEN)
 #include <Eigen/Core>
@@ -59,7 +60,7 @@
 #include <QColor>
 #endif
 
-#if defined(TINYCOLORMAP_WITH_QT5) and defined(TINYCOLORMAP_WITH_EIGEN)
+#if defined(TINYCOLORMAP_WITH_QT5) && defined(TINYCOLORMAP_WITH_EIGEN)
 #include <QImage>
 #include <QString>
 #endif
@@ -138,7 +139,7 @@ namespace tinycolormap
     inline Color GetCividisColor(double x);
     inline Color GetGithubColor(double x);
 
-#if defined(TINYCOLORMAP_WITH_QT5) and defined(TINYCOLORMAP_WITH_EIGEN)
+#if defined(TINYCOLORMAP_WITH_QT5) && defined(TINYCOLORMAP_WITH_EIGEN)
     inline QImage CreateMatrixVisualization(const Eigen::MatrixXd& matrix);
     inline void ExportMatrixVisualization(const Eigen::MatrixXd& matrix, const std::string& path);
 #endif
@@ -170,7 +171,7 @@ namespace tinycolormap
         inline double QuantizeArgument(double x, unsigned int num_levels)
         {
             // Clamp num_classes to range [1, 255].
-            num_levels = std::max(1u, std::min(num_levels, 255u));
+            num_levels = (std::max)(1u, (std::min)(num_levels, 255u));
 
             const double interval_length = 255.0 / num_levels;
 
@@ -2165,7 +2166,7 @@ namespace tinycolormap
         return internal::CalcLerp(x, data);
     }
 
-#if defined(TINYCOLORMAP_WITH_QT5) and defined(TINYCOLORMAP_WITH_EIGEN)
+#if defined(TINYCOLORMAP_WITH_QT5) && defined(TINYCOLORMAP_WITH_EIGEN)
     inline QImage CreateMatrixVisualization(const Eigen::MatrixXd& matrix)
     {
         const int w = matrix.cols();
