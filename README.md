@@ -187,6 +187,7 @@ make
 
 ## Projects using tinycolormap
 
+- OpenSiv3D <https://github.com/Siv3D/OpenSiv3D>
 - SLiM <https://github.com/MesserLab/SLiM>
 - Neper: Polycrystal Generation and Meshing <http://neper.info/>
 - Unblending (Pacific Graphics 2018) <https://github.com/yuki-koyama/unblending>
