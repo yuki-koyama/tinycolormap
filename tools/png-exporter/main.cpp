@@ -22,18 +22,19 @@ int main(int argc, char* argv[])
 
     const std::vector<std::pair<tinycolormap::ColormapType, std::string>> colormap_types
     {
-        { tinycolormap::ColormapType::Parula,  "Parula"  },
-        { tinycolormap::ColormapType::Heat,    "Heat"    },
-        { tinycolormap::ColormapType::Jet,     "Jet"     },
-        { tinycolormap::ColormapType::Turbo,   "Turbo"   },
-        { tinycolormap::ColormapType::Hot,     "Hot"     },
-        { tinycolormap::ColormapType::Gray,    "Gray"    },
-        { tinycolormap::ColormapType::Magma,   "Magma"   },
-        { tinycolormap::ColormapType::Inferno, "Inferno" },
-        { tinycolormap::ColormapType::Plasma,  "Plasma"  },
-        { tinycolormap::ColormapType::Viridis, "Viridis" },
-        { tinycolormap::ColormapType::Cividis, "Cividis" },
-        { tinycolormap::ColormapType::Github,  "Github"  },
+        { tinycolormap::ColormapType::Parula,    "Parula"    },
+        { tinycolormap::ColormapType::Heat,      "Heat"      },
+        { tinycolormap::ColormapType::Jet,       "Jet"       },
+        { tinycolormap::ColormapType::Turbo,     "Turbo"     },
+        { tinycolormap::ColormapType::Hot,       "Hot"       },
+        { tinycolormap::ColormapType::Gray,      "Gray"      },
+        { tinycolormap::ColormapType::Magma,     "Magma"     },
+        { tinycolormap::ColormapType::Inferno,   "Inferno"   },
+        { tinycolormap::ColormapType::Plasma,    "Plasma"    },
+        { tinycolormap::ColormapType::Viridis,   "Viridis"   },
+        { tinycolormap::ColormapType::Cividis,   "Cividis"   },
+        { tinycolormap::ColormapType::Github,    "Github"    },
+        { tinycolormap::ColormapType::Cubehelix, "Cubehelix" },
     };
 
     for (const auto& colormap_type : colormap_types)
