@@ -56,7 +56,7 @@ Turbo is developed as an alternative to the Jet colormap by Anton Mikhailov (Goo
 |:---------:|:-------------------------------:|
 | Cubehelix | ![](docs/samples/Cubehelix.png) |
 
-Cubehelix is developed by Dr. Dave Green and is designed for astronomical intensity images. It shows a continuous increase in perceived intensity when shown in color or greyscale. This implementation uses Green's "default" scheme (start: 0.5, rotations: -1.5, hue: 1.0, gamma: 1.0). See [the origial publication](https://ui.adsabs.harvard.edu/abs/2011BASI...39..289G/abstract) for details.
+Cubehelix is developed by Dr. Dave Green and is designed for astronomical intensity images. It shows a continuous increase in perceived intensity when shown in color or greyscale. This implementation uses Green's "default" scheme (start: 0.5, rotations: -1.5, hue: 1.0, gamma: 1.0). See [the original publication](https://ui.adsabs.harvard.edu/abs/2011BASI...39..289G/abstract) for details.
 
 ## Dependency
 
