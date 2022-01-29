@@ -52,6 +52,12 @@ This colormap is designed to mimic the color scheme used in GitHub contributions
 
 Turbo is developed as an alternative to the Jet colormap by Anton Mikhailov (Google LLC). See [the blog post](https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html) for the details. [The original lookup table](https://gist.github.com/mikhailov-work/6a308c20e494d9e0ccc29036b28faa7a) is released under the Apache 2.0 license. We merged it and re-licensed the part under the MIT license for consistency.
 
+| Name      | Sample                          |
+|:---------:|:-------------------------------:|
+| Cubehelix | ![](docs/samples/Cubehelix.png) |
+
+Cubehelix is developed by Dr. Dave Green and is designed for astronomical intensity images. It shows a continuous increase in perceived intensity when shown in color or greyscale. This implementation uses Green's "default" scheme (start: 0.5, rotations: -1.5, hue: 1.0, gamma: 1.0). See [the original publication](https://ui.adsabs.harvard.edu/abs/2011BASI...39..289G/abstract) for details.
+
 ## Dependency
 
 tinycolormap does not have any dependencies except for C++11 standard library.
