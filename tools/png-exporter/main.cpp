@@ -35,6 +35,7 @@ int main(int argc, char* argv[])
         { tinycolormap::ColormapType::Cividis,   "Cividis"   },
         { tinycolormap::ColormapType::Github,    "Github"    },
         { tinycolormap::ColormapType::Cubehelix, "Cubehelix" },
+        { tinycolormap::ColormapType::HSV,       "HSV"       },
     };
 
     for (const auto& colormap_type : colormap_types)
