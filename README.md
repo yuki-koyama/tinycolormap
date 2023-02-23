@@ -196,6 +196,7 @@ make
 
 ## Projects using tinycolormap
 
+- riCOM <https://github.com/ThFriedrich/riCOM_cpp>
 - OpenSiv3D <https://github.com/Siv3D/OpenSiv3D>
 - SLiM <https://github.com/MesserLab/SLiM>
 - Neper: Polycrystal Generation and Meshing <http://neper.info/>
