@@ -17,6 +17,7 @@ A header-only, single-file library for colormaps written in C++11.
 | Hot      | ![](docs/samples/Hot.png)      |
 | Jet      | ![](docs/samples/Jet.png)      |
 | Gray     | ![](docs/samples/Gray.png)     |
+| HSV      | ![](docs/samples/HSV.png)     |
 
 Reference: <https://www.mathworks.com/help/matlab/ref/colormap.html>
 
@@ -35,6 +36,8 @@ These colormaps are designed to be perceptually uniform (even in black-and-white
 Magma, Inferno, Plasma, Viridis are released under CC0 by Nathaniel J. Smith, Stefan van der Walt, and (in the case of Viridis) Eric Firing: <https://github.com/BIDS/colormap/blob/master/colormaps.py>. Their python code is adapted for the use in C++11.
 
 Cividis is released under CC0 by the authors of PLOS ONE paper (Jamie R. Nuñez, Christopher R. Anderton, Ryan S. Renslow): <https://doi.org/10.1371/journal.pone.0199239>. We incorporated the LUT into C++11.
+
+The HSV colormap is cyclic and is particularly useful for plotting angles or phases because the color transition from 1 to 0 is smooth. A phase wrap would thus not appear as a sharp edge.
 
 ### GitHub
 
